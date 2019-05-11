@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: "postgres:11.2-alpine"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./_services/postgres/data/:/var/lib/postgresql/data/"
+      - "./_services/postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/"
+    environment:
+      POSTGRES_PASSWORD: "password"
+  mtgjson-import:
+    build:
+      context: ./mtgjson-import/
+    environment:
+      POSTGRES_URI: "postgresql://postgres:5432/resources"
+      POSTGRES_USERNAME: "application"
+      POSTGRES_PASSWORD: "password"
