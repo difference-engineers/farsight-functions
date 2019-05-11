@@ -4,6 +4,7 @@ WORKDIR /home/root/application/
 
 COPY Gemfile .
 COPY Gemfile.lock .
+COPY puma.rb config/puma.rb
 COPY config.ru .
 
 ARG MASTER_KEY
