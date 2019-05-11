@@ -1,0 +1,7 @@
+#!/bin/bash
+
+project=$0;
+
+mkdir $project;
+cp templates/* $project/;
+ln -svfF ../.tool-versions $project/.tool-versions;
