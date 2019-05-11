@@ -11,8 +11,6 @@ WORKDIR /home/root/application/
 
 COPY Gemfile .
 COPY Gemfile.lock .
-COPY puma.rb config/puma.rb
-COPY config.ru .
 
 ARG DEPLOY_ENV
 ARG RACK_ENV
@@ -23,6 +21,9 @@ ENV RACK_ENV ${RACK_ENV:-development}
 ENV PORT ${PORT:-8080}
 
 RUN bundle install --deployment --frozen
+
+COPY puma.rb config/puma.rb
+COPY config.ru .
 
 EXPOSE $PORT
 
