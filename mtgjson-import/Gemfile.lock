@@ -1,0 +1,55 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    async (1.17.1)
+      console (~> 1.0)
+      nio4r (~> 2.3)
+      timers (~> 4.1)
+    async-container (0.10.2)
+      async (~> 1.0)
+      async-io (~> 1.4)
+      process-group
+    async-http (0.39.0)
+      async (~> 1.14)
+      async-io (~> 1.18)
+      protocol-http (~> 0.1.0)
+      protocol-http1 (~> 0.1.0)
+      protocol-http2 (~> 0.1.0)
+    async-io (1.23.1)
+      async (~> 1.14)
+    build-environment (1.10.1)
+    console (1.2.3)
+    falcon (0.29.0)
+      async (~> 1.13)
+      async-container (~> 0.10.0)
+      async-http (~> 0.39.0)
+      async-io (~> 1.22)
+      build-environment (~> 1.6)
+      localhost (~> 1.1)
+      rack (>= 1.0)
+      samovar (~> 2.1)
+    localhost (1.1.5)
+    mapping (1.1.1)
+    nio4r (2.3.1-java)
+    process-group (1.1.0)
+    protocol-hpack (1.0.0)
+    protocol-http (0.1.0)
+    protocol-http1 (0.1.0)
+      protocol-http
+    protocol-http2 (0.1.1)
+      protocol-hpack (~> 1.0)
+      protocol-http
+    rack (2.0.7)
+    samovar (2.1.1)
+      console (~> 1.0)
+      mapping (~> 1.0)
+    timers (4.3.0)
+
+PLATFORMS
+  java
+
+DEPENDENCIES
+  falcon (= 0.29.0)
+
+BUNDLED WITH
+   2.0.1
