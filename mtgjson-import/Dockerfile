@@ -26,4 +26,4 @@ RUN bundle install --deployment --frozen
 
 EXPOSE $PORT
 
-CMD ["bundle exec puma serve"]
+CMD ["bundle", "exec", "puma"]
