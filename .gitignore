@@ -10,7 +10,7 @@
 # Ignore all temporary files
 /tmp/*
 !/tmp/.keep
-/services/*/data/
+/_services/*/data/
 
 # Ignore secret data
 /.env
