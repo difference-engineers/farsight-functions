@@ -13,6 +13,8 @@ services:
   mtgjson-import:
     build:
       context: ./mtgjson-import/
+    ports:
+      - "8080:8080"
     environment:
       POSTGRES_URI: "postgresql://postgres:5432/resources"
       POSTGRES_USERNAME: "application"
