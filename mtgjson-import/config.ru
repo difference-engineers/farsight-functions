@@ -1,17 +1,36 @@
 require "rubygems"
 require "bundler"
-Bundler.setup(:default, ENV.fetch("DEPLOY_ENV", "development"))
+
 Bundler.require(:default, ENV.fetch("DEPLOY_ENV", "development"))
 
-DATABASE_CONFIGURATION = ROM::Configuration.new(
-  :sql,
-  ENV.fetch("POSTGRES_URI"),
+CONFIGURATION =
+
+# TODO: Figure out why I need this?
+# class Application
+#
+# end
+
+ORM = ROM.container(:sql, ENV.fetch("POSTGRES_URI"), {
+  encoding: 'UTF8',
   username: ENV.fetch("POSTGRES_USERNAME"),
   password: ENV.fetch("POSTGRES_PASSWORD")
-)
+}) do |let|
+  # let.default.create_table(:cards) do
+  #   primary_key :id
+  #   column :name, String, null: false
+  # end
 
-DATABASE_CONFIGURATION.auto_registration
+  let.relation(:cards) do
+    schema(infer: true)
+    auto_struct true
+  end
+end
 
-p Relations::Cards.map(&:name)
 
-run lambda {|env| [200, {}, []]}
+run ->(env) do
+  ORM.relations[:cards].changeset(:create, name: "Test").commit
+
+  p ORM.relations[:cards].map(&:name)
+
+  [200, {}, []]
+end
