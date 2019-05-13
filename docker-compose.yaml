@@ -5,6 +5,8 @@ services:
     image: "postgres:11.2-alpine"
     ports:
       - "5432:5432"
+    labels:
+      traefik.enable: "false"
     volumes:
       - "./_services/postgres/data/:/var/lib/postgresql/data/"
       - "./_services/postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/"
@@ -13,9 +15,24 @@ services:
   mtgjson-import:
     build:
       context: ./mtgjson-import/
-    ports:
-      - "8080:8080"
+    labels:
+      traefik.port: "8080"
     environment:
       POSTGRES_URI: "postgresql://postgres:5432/resources"
       POSTGRES_USERNAME: "application"
       POSTGRES_PASSWORD: "password"
+  traefik:
+    image: "traefik:v1.7.11"
+    command:
+      - "--api"
+      - "--docker"
+      - "--docker.watch"
+      - "--logLevel=DEBUG"
+      - "--accessLog"
+    ports:
+      - "3000:80"
+      - "8080:8080"
+    labels:
+      traefik.port: "8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
