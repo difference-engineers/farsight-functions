@@ -19,11 +19,8 @@ ORM = ROM.container(:sql, ENV.fetch("POSTGRES_URI"), {
   end
 end
 
+CARDS = ORM.relations[:cards]
 
 run ->(env) do
-  ORM.relations[:cards].changeset(:create, id: SecureRandom.uuid).commit
-
-  p
-
-  [200, {}, [ORM.relations[:cards].map {|row| row.fetch(:id)}.join(",")]]
+  [200, {}, [CARDS.count.to_s]]
 end
