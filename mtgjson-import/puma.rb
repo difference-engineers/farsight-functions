@@ -11,7 +11,7 @@ environment ENV.fetch("RACK_ENV")
 #
 # The default is "0, 16".
 #
-threads 0, 2
+threads 0, 1
 
 # Bind the server to "url". "tcp://", "unix://" and "ssl://" are the only
 # accepted protocols.
