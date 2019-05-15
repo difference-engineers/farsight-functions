@@ -1,5 +1,6 @@
 version: "3.7"
 
+
 services:
   postgres:
     image: "postgres:11.2-alpine"
@@ -12,6 +13,9 @@ services:
       - "./_services/postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/"
     environment:
       POSTGRES_PASSWORD: "password"
+    logging:
+      options:
+        max-size: 1m
   mtgjson-import:
     build:
       context: ./mtgjson-import/
@@ -21,13 +25,20 @@ services:
       POSTGRES_URI: "postgresql://postgres:5432/resources"
       POSTGRES_USERNAME: "application"
       POSTGRES_PASSWORD: "password"
+      JRUBY_OPTS: "-J-XX:MaxRAM=225m -J-XX:+PrintFlagsFinal"
+    logging:
+      options:
+        max-size: 1m
+    deploy:
+      resources:
+        limits:
+          memory: 256m
   traefik:
     image: "traefik:v1.7.11"
     command:
       - "--api"
       - "--docker"
       - "--docker.watch"
-      - "--logLevel=DEBUG"
       - "--accessLog"
     ports:
       - "3000:80"
@@ -36,3 +47,6 @@ services:
       traefik.port: "8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+    logging:
+      options:
+        max-size: 1m
