@@ -19,8 +19,8 @@ ORM = ROM.container(:sql, ENV.fetch("POSTGRES_URI"), {
   end
 end
 
-CARDS = ORM.relations[:cards]
+require_relative "handler"
 
 run ->(env) do
-  [200, {}, [CARDS.count.to_s]]
+  [200, {}, [handler(ORM)]]
 end
