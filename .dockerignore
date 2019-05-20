@@ -3,9 +3,7 @@
 .git/
 .rubocop/
 services/
-docker/
 gcloud/
-kubernetes/
 docs/
 tmp/
 .DS_Store
