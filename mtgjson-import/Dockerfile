@@ -23,6 +23,9 @@ ENV PORT ${PORT:-8080}
 RUN bundle install --deployment --frozen
 
 COPY puma.rb config/puma.rb
+COPY application.rb .
+COPY database.rb .
+COPY function.rb .
 COPY config.ru .
 
 EXPOSE $PORT

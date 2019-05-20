@@ -4,23 +4,8 @@ require "bundler"
 
 Bundler.require(:default, ENV.fetch("DEPLOY_ENV", "development"))
 
-ORM = ROM.container(:sql, ENV.fetch("POSTGRES_URI"), {
-  encoding: 'UTF8',
-  username: ENV.fetch("POSTGRES_USERNAME"),
-  password: ENV.fetch("POSTGRES_PASSWORD")
-}) do |let|
-  let.default.create_table(:cards) do
-    primary_key :id
-  end
+require_relative "application"
+require_relative "database"
+require_relative "function"
 
-  let.relation(:cards) do
-    schema(infer: true)
-    auto_struct true
-  end
-end
-
-require_relative "handler"
-
-run ->(env) do
-  [200, {}, [handler(ORM)]]
-end
+run Application.freeze.app
