@@ -11,7 +11,7 @@ environment ENV.fetch("RACK_ENV")
 #
 # The default is "0, 16".
 #
-threads 0, 1
+threads 0, 2
 
 # Bind the server to "url". "tcp://", "unix://" and "ssl://" are the only
 # accepted protocols.
@@ -36,7 +36,7 @@ bind "tcp://0.0.0.0:#{ENV.fetch("PORT")}"
 #
 # The default is "0".
 #
-# workers 2
+workers 2
 
 # Code to run immediately before the master starts workers.
 #
@@ -88,7 +88,7 @@ bind "tcp://0.0.0.0:#{ENV.fetch("PORT")}"
 # Preload the application before starting the workers; this conflicts with
 # phased restart feature. (off by default)
 
-# preload_app!
+preload_app!
 
 # Raise SignalException when Puma receives SIGTERM. This enables to suppress
 # exception in environments where SIGTERM is expected.
@@ -110,13 +110,13 @@ tag ENV.fetch("NAME")
 #
 # The minimum value is 6 seconds, the default value is 60 seconds.
 #
-# worker_timeout 60
+worker_timeout 60
 
 # Change the default worker timeout for booting
 #
 # If unspecified, this defaults to the value of worker_timeout.
 #
-# worker_boot_timeout 60
+worker_boot_timeout 60
 
 # === Puma control rack application ===
 
