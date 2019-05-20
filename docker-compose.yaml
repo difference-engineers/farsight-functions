@@ -22,10 +22,11 @@ services:
     labels:
       traefik.port: "8080"
     environment:
-      POSTGRES_URI: "postgresql://postgres:5432/resources"
+      POSTGRES_URI: "postgresql:///resources"
+      POSTGRES_HOST: "postgres"
       POSTGRES_USERNAME: "application"
       POSTGRES_PASSWORD: "password"
-      JRUBY_OPTS: "-J-XX:MaxRAM=225m -J-XX:+PrintFlagsFinal"
+      JRUBY_OPTS: "-J-XX:MaxRAM=225m"
     logging:
       options:
         max-size: 1m
