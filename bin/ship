@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PROJECT_ID="farsight-239605"
+FUNCTION_ID=$1
+SHORT_SHA=`git rev-parse --short HEAD`
+
+docker push us.gcr.io/$PROJECT_ID/base:latest
+docker push us.gcr.io/$PROJECT_ID/base:$SHORT_SHA
+docker push us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest
+docker push us.gcr.io/$PROJECT_ID/$FUNCTION_ID:$SHORT_SHA
+gcloud beta run deploy --image us.gcr.io/$PROJECT_ID/$FUNCTION_ID:$SHORT_SHA $FUNCTION_ID --add-cloudsql-instances primary

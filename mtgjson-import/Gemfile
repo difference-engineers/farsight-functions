@@ -2,10 +2,13 @@
 
 source "https://rubygems.org"
 
+ruby "2.6.3"
+
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "rom", "~> 5.0"
 gem "rom-sql", "~> 3.0"
-gem "jruby-pg", "~> 0.1"
-gem "puma", "~> 3.12"
 gem "roda", "~> 3.20"
+gem "falcon", "~> 0.30.0"
+gem "pg", "~> 1.1"
+gem "rake", "~> 12.3"

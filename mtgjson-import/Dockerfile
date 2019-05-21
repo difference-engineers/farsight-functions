@@ -1,16 +1,10 @@
-FROM jruby:9.2.7.0
+ARG PROJECT_ID
 
-ARG MASTER_KEY
+FROM gcr.io/$PROJECT_ID/base:latest
 
-ENV MASTER_KEY $MASTER_KEY
 ENV NAME "mtgjson-import"
-ENV BUNDLE_PATH "/home/root/application/vendor/"
-ENV BUNDLE_JOBS "2"
 
 WORKDIR /home/root/application/
-
-COPY Gemfile .
-COPY Gemfile.lock .
 
 ARG DEPLOY_ENV
 ARG RACK_ENV
@@ -20,14 +14,13 @@ ENV DEPLOY_ENV ${DEPLOY_ENV:-development}
 ENV RACK_ENV ${RACK_ENV:-development}
 ENV PORT ${PORT:-8080}
 
+COPY Gemfile .
+COPY Gemfile.lock .
+
 RUN bundle install --deployment --frozen
 
-COPY puma.rb config/puma.rb
-COPY application.rb .
-COPY database.rb .
 COPY function.rb .
-COPY config.ru .
 
 EXPOSE $PORT
 
-CMD ["bundle", "exec", "puma"]
+CMD ["bundle", "exec", "falcon serve --threaded --count 1 --bind http://0.0.0.0:$PORT"]
