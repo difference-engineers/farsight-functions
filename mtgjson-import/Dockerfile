@@ -1,6 +1,4 @@
-ARG PROJECT_ID
-
-FROM gcr.io/$PROJECT_ID/base:latest
+FROM us.gcr.io/farsight-239605/base:latest
 
 ENV NAME "mtgjson-import"
 
@@ -9,10 +7,12 @@ WORKDIR /home/root/application/
 ARG DEPLOY_ENV
 ARG RACK_ENV
 ARG PORT
+ARG CONCURRENCY
 
 ENV DEPLOY_ENV ${DEPLOY_ENV:-development}
 ENV RACK_ENV ${RACK_ENV:-development}
 ENV PORT ${PORT:-8080}
+ENV CONCURRENCY ${CONCURRENCY:-2}
 
 COPY Gemfile .
 COPY Gemfile.lock .
@@ -23,4 +23,4 @@ COPY function.rb .
 
 EXPOSE $PORT
 
-CMD ["bundle", "exec", "falcon serve --threaded --count 1 --bind http://0.0.0.0:$PORT"]
+CMD ["bundle", "exec", "falcon --verbose serve --threaded --count $CONCURRENCY --bind http://0.0.0.0:$PORT"]

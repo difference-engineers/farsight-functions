@@ -35,8 +35,6 @@ services:
   mtgjson-import:
     build:
       context: ./mtgjson-import/
-      args:
-        PROJECT_ID: "farsight-239605"
     labels:
       traefik.port: "8080"
     environment:

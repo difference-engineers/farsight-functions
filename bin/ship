@@ -4,6 +4,8 @@ PROJECT_ID="farsight-239605"
 FUNCTION_ID=$1
 SHORT_SHA=`git rev-parse --short HEAD`
 
+bin/build $FUNCTION_ID
+
 docker push us.gcr.io/$PROJECT_ID/base:latest
 docker push us.gcr.io/$PROJECT_ID/base:$SHORT_SHA
 docker push us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest

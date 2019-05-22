@@ -10,9 +10,12 @@ docker build \
   --tag us.gcr.io/$PROJECT_ID/base:$SHORT_SHA \
   _base
 
-docker build \
-  --build-arg PROJECT_ID=$PROJECT_ID \
-  --cache-from us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest \
-  --tag us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest \
-  --tag us.gcr.io/$PROJECT_ID/$FUNCTION_ID:$SHORT_SHA \
-  $FUNCTION_ID
+if [ $FUNCTION_ID ]
+  then
+  docker build \
+    --build-arg PROJECT_ID=$PROJECT_ID \
+    --cache-from us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest \
+    --tag us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest \
+    --tag us.gcr.io/$PROJECT_ID/$FUNCTION_ID:$SHORT_SHA \
+    $FUNCTION_ID
+fi

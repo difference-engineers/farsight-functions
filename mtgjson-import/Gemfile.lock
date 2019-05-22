@@ -104,6 +104,8 @@ GEM
     samovar (2.1.1)
       console (~> 1.0)
       mapping (~> 1.0)
+    semantic_logger (4.5.0)
+      concurrent-ruby (~> 1.0)
     sequel (5.20.0)
     timers (4.3.0)
     transproc (1.0.3)
@@ -118,6 +120,7 @@ DEPENDENCIES
   roda (~> 3.20)
   rom (~> 5.0)
   rom-sql (~> 3.0)
+  semantic_logger (~> 4.5)
 
 RUBY VERSION
    ruby 2.6.3p62
