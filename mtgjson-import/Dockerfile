@@ -15,4 +15,4 @@ COPY function.rb .
 
 EXPOSE $PORT
 
-CMD ["bundle", "exec", "falcon --verbose serve --threaded --count $CONCURRENCY --bind http://0.0.0.0:$PORT"]
+CMD ["bundle", "exec", "falcon serve --threaded --count $CONCURRENCY --bind http://0.0.0.0:$PORT"]
