@@ -13,8 +13,9 @@ docker build \
 if [ $FUNCTION_ID ]
   then
   docker build \
-    --build-arg PROJECT_ID=$PROJECT_ID \
+    --cache-from us.gcr.io/$PROJECT_ID/base:latest \
     --cache-from us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest \
+    --tag farsight-functions_$FUNCTION_ID \
     --tag us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest \
     --tag us.gcr.io/$PROJECT_ID/$FUNCTION_ID:$SHORT_SHA \
     $FUNCTION_ID

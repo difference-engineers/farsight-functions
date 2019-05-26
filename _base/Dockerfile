@@ -5,9 +5,6 @@ ENV BUNDLE_JOBS "2"
 
 WORKDIR /home/root/application/
 
-ARG PORT
-ENV PORT ${PORT:-8080}
-
 COPY db/migrate/ db/migrate/
 COPY boot.rb .
 COPY configuration.rb .
