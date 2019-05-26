@@ -4,15 +4,7 @@ ENV NAME "mtgjson-import"
 
 WORKDIR /home/root/application/
 
-ARG DEPLOY_ENV
-ARG RACK_ENV
-ARG PORT
-ARG CONCURRENCY
-
-ENV DEPLOY_ENV ${DEPLOY_ENV:-development}
-ENV RACK_ENV ${RACK_ENV:-development}
-ENV PORT ${PORT:-8080}
-ENV CONCURRENCY ${CONCURRENCY:-2}
+ENV PORT 8080
 
 COPY Gemfile .
 COPY Gemfile.lock .
