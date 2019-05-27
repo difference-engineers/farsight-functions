@@ -1,7 +1,5 @@
 #!/bin/bash
 
-FUNCTION_ID=$1
-
 docker build \
   --cache-from us.gcr.io/${PROJECT_ID-$1}/base:latest \
   --tag us.gcr.io/${PROJECT_ID-$1}/base:latest \
