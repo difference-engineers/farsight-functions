@@ -2,8 +2,8 @@
 images:
   - "us.gcr.io/$PROJECT_ID/base:latest"
   - "us.gcr.io/$PROJECT_ID/base:$SHORT_SHA"
-  - "us.gcr.io/$PROJECT_ID/mtgjson-import:latest"
-  - "us.gcr.io/$PROJECT_ID/mtgjson-import:$SHORT_SHA"
+  - "us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest"
+  - "us.gcr.io/$PROJECT_ID/$FUNCTION_ID:$SHORT_SHA"
 timeout: "5m"
 steps:
   - name: "gcr.io/cloud-builders/docker"
@@ -15,7 +15,7 @@ steps:
     entrypoint: "sh"
     args:
       - "-c"
-      - "docker pull us.gcr.io/$PROJECT_ID/mtgjson-import:latest || exit 0"
+      - "docker pull us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest || exit 0"
   - name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
     args:
@@ -24,7 +24,6 @@ steps:
     env:
       - "SHORT_SHA=$SHORT_SHA"
       - "PROJECT_ID=$PROJECT_ID"
-      - "FUNCTION_ID=mtgjson-import"
   - name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
     args:
@@ -33,7 +32,6 @@ steps:
     env:
       - "SHORT_SHA=$SHORT_SHA"
       - "PROJECT_ID=$PROJECT_ID"
-      - "FUNCTION_ID=mtgjson-import"
   - name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "sh"
     args:
@@ -42,4 +40,3 @@ steps:
     env:
       - "SHORT_SHA=$SHORT_SHA"
       - "PROJECT_ID=$PROJECT_ID"
-      - "FUNCTION_ID=mtgjson-import"

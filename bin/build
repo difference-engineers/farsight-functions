@@ -6,13 +6,13 @@ docker build \
   --tag us.gcr.io/${PROJECT_ID-$1}/base:${SHORT_SHA-$2} \
   _base
 
-if [ ${FUNCTION_ID-$3} ]
+if [ ${_FUNCTION_ID-$3} ]
   then
   docker build \
     --cache-from us.gcr.io/${PROJECT_ID-$1}/base:latest \
-    --cache-from us.gcr.io/${PROJECT_ID-$1}/$FUNCTION_ID:latest \
-    --tag farsight-functions_${FUNCTION_ID-$3} \
-    --tag us.gcr.io/${PROJECT_ID-$1}/${FUNCTION_ID-$3}:latest \
-    --tag us.gcr.io/${PROJECT_ID-$1}/${FUNCTION_ID-$3}:${SHORT_SHA-$2} \
-    ${FUNCTION_ID-$}
+    --cache-from us.gcr.io/${PROJECT_ID-$1}/$_FUNCTION_ID:latest \
+    --tag farsight-functions_${_FUNCTION_ID-$3} \
+    --tag us.gcr.io/${PROJECT_ID-$1}/${_FUNCTION_ID-$3}:latest \
+    --tag us.gcr.io/${PROJECT_ID-$1}/${_FUNCTION_ID-$3}:${SHORT_SHA-$2} \
+    ${_FUNCTION_ID-$}
 fi

@@ -1,5 +1,5 @@
 #!/bin/bash
 
 gcloud beta run deploy \
-  --image us.gcr.io/${PROJECT_ID:-$1}/$FUNCTION_ID:${SHORT_SHA-$2} ${FUNCTION_ID-$3} \
+  --image us.gcr.io/${PROJECT_ID:-$1}/$FUNCTION_ID:${SHORT_SHA-$2} ${_FUNCTION_ID-$3} \
   --add-cloudsql-instances primary --region us-central1
