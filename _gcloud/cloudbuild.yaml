@@ -6,17 +6,17 @@ images:
   - "us.gcr.io/$PROJECT_ID/mtgjson-import:$SHORT_SHA"
 timeout: "5m"
 steps:
-  - name: "us.gcr.io/cloud-builders/docker"
+  - name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
     args:
       - "-c"
       - "docker pull us.gcr.io/$PROJECT_ID/base:latest || exit 0"
-  - name: "us.gcr.io/cloud-builders/docker"
+  - name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
     args:
       - "-c"
       - "docker pull us.gcr.io/$PROJECT_ID/mtgjson-import:latest || exit 0"
-  - name: "us.gcr.io/cloud-builders/docker"
+  - name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
     args:
       - "-c"
@@ -24,7 +24,7 @@ steps:
     env:
       - "SHORT_SHA=$SHORT_SHA"
       - "PROJECT_ID=$PROJECT_ID"
-  - name: "us.gcr.io/cloud-builders/docker"
+  - name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
     args:
       - "-c"
