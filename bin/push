@@ -1,0 +1,9 @@
+#!/bin/bash
+
+docker push us.gcr.io/${PROJECT_ID-$1}/base:latest
+docker push us.gcr.io/${PROJECT_ID-$1}/base:${SHORT_SHA-$2}
+if [ ${FUNCTION_ID-$3} ]
+  then
+  docker push us.gcr.io/${PROJECT_ID-$1}/${FUNCTION_ID-$3}:latest
+  docker push us.gcr.io/${PROJECT_ID-$1}/${FUNCTION_ID-$3}:${SHORT_SHA-$2}
+fi

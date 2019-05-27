@@ -1,22 +1,20 @@
 #!/bin/bash
 
-PROJECT_ID="farsight-239605"
 FUNCTION_ID=$1
-SHORT_SHA=`git rev-parse --short HEAD`
 
 docker build \
-  --cache-from us.gcr.io/$PROJECT_ID/base:latest \
-  --tag us.gcr.io/$PROJECT_ID/base:latest \
-  --tag us.gcr.io/$PROJECT_ID/base:$SHORT_SHA \
+  --cache-from us.gcr.io/${PROJECT_ID-$1}/base:latest \
+  --tag us.gcr.io/${PROJECT_ID-$1}/base:latest \
+  --tag us.gcr.io/${PROJECT_ID-$1}/base:${SHORT_SHA-$2} \
   _base
 
-if [ $FUNCTION_ID ]
+if [ ${FUNCTION_ID-$3} ]
   then
   docker build \
-    --cache-from us.gcr.io/$PROJECT_ID/base:latest \
-    --cache-from us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest \
-    --tag farsight-functions_$FUNCTION_ID \
-    --tag us.gcr.io/$PROJECT_ID/$FUNCTION_ID:latest \
-    --tag us.gcr.io/$PROJECT_ID/$FUNCTION_ID:$SHORT_SHA \
-    $FUNCTION_ID
+    --cache-from us.gcr.io/${PROJECT_ID-$1}/base:latest \
+    --cache-from us.gcr.io/${PROJECT_ID-$1}/$FUNCTION_ID:latest \
+    --tag farsight-functions_${FUNCTION_ID-$3} \
+    --tag us.gcr.io/${PROJECT_ID-$1}/${FUNCTION_ID-$3}:latest \
+    --tag us.gcr.io/${PROJECT_ID-$1}/${FUNCTION_ID-$3}:${SHORT_SHA-$2}: \
+    ${FUNCTION_ID-$}
 fi
