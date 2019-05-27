@@ -42,6 +42,10 @@ services:
       POSTGRES_HOST: "postgres"
       POSTGRES_USERNAME: "application"
       POSTGRES_PASSWORD: "password"
+      VERSION: "1"
+      DEPLOY_ENV: "development"
+      RACK_ENV: "development"
+      CONCURRENCY: 10
     logging:
       options:
         max-size: 1m

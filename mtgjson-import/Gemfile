@@ -13,3 +13,10 @@ gem "falcon", "~> 0.30.0"
 gem "pg", "~> 1.1"
 gem "rake", "~> 12.3"
 gem "semantic_logger", "~> 4.5"
+gem "stackdriver", "~> 0.15.3", require: [
+  "stackdriver",
+  "google/cloud/debugger",
+  "google/cloud/trace",
+  "google/cloud/error_reporting",
+  "google/cloud/logging"
+]
