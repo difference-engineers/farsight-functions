@@ -20,7 +20,7 @@ steps:
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/build mtgjson"
+      - "bin/build mtgjson-import"
     env:
       - "SHORT_SHA=$SHORT_SHA"
       - "PROJECT_ID=$PROJECT_ID"
@@ -28,7 +28,7 @@ steps:
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/ship mtgjson"
+      - "bin/ship mtgjson-import"
     env:
       - "SHORT_SHA=$SHORT_SHA"
       - "PROJECT_ID=$PROJECT_ID"
