@@ -1,5 +1,5 @@
-def function(router:, response:, database:)
+def function(response:, database:)
   cards = database.relations.fetch(:cards)
-  response.status = 200
   response.write(cards.count.to_s)
+  response.status = :ok
 end

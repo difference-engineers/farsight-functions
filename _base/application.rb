@@ -12,6 +12,7 @@ class Application < Roda
   route do |router|
     router.root do
       router.get do
+        # GET /
         function(router: router, response: response, database: ::DATABASE)
       end
     end
