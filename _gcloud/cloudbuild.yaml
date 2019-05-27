@@ -20,15 +20,17 @@ steps:
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/build mtgjson-import"
+      - "bin/build"
     env:
       - "SHORT_SHA=$SHORT_SHA"
       - "PROJECT_ID=$PROJECT_ID"
+      - "FUNCTION_ID=mtgjson-import"
   - name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/ship mtgjson-import"
+      - "bin/ship"
     env:
       - "SHORT_SHA=$SHORT_SHA"
       - "PROJECT_ID=$PROJECT_ID"
+      - "FUNCTION_ID=mtgjson-import"
