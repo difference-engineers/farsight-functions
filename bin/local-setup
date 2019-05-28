@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source .local-env &&
+_services/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh &&
 cd mtgjson-import &&
 ln -svfF ../_base/db/* db/ &&
 ln -svfF ../_base/boot.rb boot.rb &&
