@@ -15,3 +15,10 @@
 # Ignore secret data
 /.env
 /master.key
+*/db/
+*/application.rb
+*/configuration.rb
+*/config.ru
+*/database.rb
+*/Rakefile
+!_base/*

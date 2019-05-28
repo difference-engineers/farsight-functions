@@ -1,4 +1,4 @@
-def function(response:, database:)
+def function(response:, router:, database:)
   uri = URI('https://mtgjson.com/json/AllCards.json')
   response = Net::HTTP.get(uri)
   json = JSON.parse(response)
