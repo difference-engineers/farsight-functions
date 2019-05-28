@@ -1,2 +1,7 @@
 # The Docker image to run your workspace in. Defaults to gitpod/workspace-full
 image: gitpod/workspace-postgres
+tasks:
+  - command: bin/local-setup
+  - command: echo "Run bin/local-start"
+ports:
+  - port: 8080

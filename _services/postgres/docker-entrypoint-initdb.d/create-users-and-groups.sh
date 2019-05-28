@@ -2,8 +2,5 @@
 
 set -e
 
-psql -v ON_ERROR_STOP=1 --username "postgres" <<-EOSQL
-  CREATE USER "application" LOGIN SUPERUSER PASSWORD 'password';
-  CREATE DATABASE "resources";
-  GRANT ALL PRIVILEGES ON DATABASE "resources" TO "application";
-EOSQL
+createuser --host=$DATABASE_HOST --username=$POSTGRES_USERNAME application
+createdb --host=$DATABASE_HOST --username=$POSTGRES_USERNAME --owner=application resources
