@@ -2,4 +2,6 @@
 
 set -e
 
-bundle exec falcon serve --threaded --count $CONCURRENCY --bind 'http://0.0.0.0:8080'
+source .local-env &&
+cd $1 &&
+FUNCTION=$1 bundle exec falcon serve --bind 'http://0.0.0.0:8080' --threaded --count $CONCURRENCY
