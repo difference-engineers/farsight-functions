@@ -1,0 +1,8 @@
+#!/bin/bash
+
+source .local-env &&
+cd mtgjson-import &&
+ln -svfF ../_base/* . &&
+unlink Dockerfile &&
+git checkout -- Dockerfile &&
+bundle exec rake db:setup
