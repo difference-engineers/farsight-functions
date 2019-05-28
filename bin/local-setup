@@ -9,7 +9,8 @@ ln -svfF ../_base/db/ . &&
 ln -svfF ../_base/boot.rb boot.rb &&
 ln -svfF ../_base/config.ru config.ru &&
 ln -svfF ../_base/configuration.rb configuration.rb &&
+ln -svfF ../_base/application.rb application.rb &&
 ln -svfF ../_base/database.rb database.rb &&
 ln -svfF ../_base/Rakefile Rakefile &&
 bundle install &&
-FUNCTION=mtgjson-import VERSION=1 bundle exec rake db:setup
+FUNCTION=mtgjson-import VERSION=0 bundle exec rake db:setup
