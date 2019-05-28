@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 gcloud beta run deploy \
   --image us.gcr.io/farsight-239605/$1:`git rev-parse --short HEAD 2> /dev/null` \
   $1 \

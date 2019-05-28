@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 unlink mtgjson-import/_base/db/ &&
 unlink mtgjson-import/_base/boot.rb &&
 unlink mtgjson-import/_base/config.ru &&
