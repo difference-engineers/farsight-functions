@@ -4,5 +4,5 @@ puts "What's the name of this function?"
 name = gets.chomp.gsub(/(\W|\.)/, "-")
 system("mkdir #{name}/")
 system("cp -r _template/* #{name}/")
-system("ln -svfF ../.tool-versions .tool-versions")
+system("cd #{name} && ln -sfF ../.tool-versions .tool-versions")
 File.write(File.join(name, "Dockerfile"), File.read(File.join(name, "Dockerfile")).gsub("{{name}}", name))
