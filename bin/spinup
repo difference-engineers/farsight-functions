@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 bin/build &&
 docker-compose build --compress --parallel &&
 docker-compose --compatibility up mtgjson-import

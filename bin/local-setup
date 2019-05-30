@@ -1,12 +1,16 @@
 #!/bin/bash
 
+set -e
+
 source .local-env &&
 _services/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh &&
 cd mtgjson-import &&
-ln -svfF ../_base/db/* db/ &&
+ln -svfF ../_base/db/ . &&
 ln -svfF ../_base/boot.rb boot.rb &&
 ln -svfF ../_base/config.ru config.ru &&
 ln -svfF ../_base/configuration.rb configuration.rb &&
+ln -svfF ../_base/application.rb application.rb &&
 ln -svfF ../_base/database.rb database.rb &&
 ln -svfF ../_base/Rakefile Rakefile &&
-bundle exec rake db:setup
+bundle install &&
+FUNCTION=mtgjson-import VERSION=0 bundle exec rake db:setup
