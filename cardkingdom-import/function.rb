@@ -40,3 +40,21 @@ def parse_buylist(url)
     puts cardname, set, cash, "foil: " + foil, "\n"
   end
 end
+
+def parse_retail(url)
+  temp_url = "https://cardkingdom.com/catalog/view?filter%5Bipp%5D=60&filter%5Bsort%5D=most_popular&filter%5Bsearch%5D=mtg_advanced&filter%5Bcategory_id%5D=3058&filter%5Bmulti%5D%5B0%5D=1&filter%5Btype_mode%5D=any&filter%5Bmanaprod_select%5D=any"
+
+  raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
+  raw.css('div.itemContentWrapper').each do |card|
+    # add handling for unusual cards: prerelease promos, con promos, buy a box, etc
+    cardname     =
+    set          =
+    nm_inventory =
+    ex_inventory =
+    vg_inventory =
+    g_inventory  =
+    nm_price     =
+    ex_price     =
+    vg_price     =
+    g_price      =
+end
