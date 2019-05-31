@@ -58,3 +58,10 @@ def parse_retail(url)
     vg_price     =
     g_price      =
 end
+
+def next_page(raw_nokogiri)
+  # search for pagination element with "»"
+  last_li = raw_nokogiri.css('li.pagination').last.inner_text
+  url = raw_nokogiri.css('li.pagination').last.href
+  return url if last_li == "»" else false
+end
