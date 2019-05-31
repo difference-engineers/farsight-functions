@@ -3,9 +3,17 @@ def function(response:, router:, database:)
 end
 
 def update_buylist
+  categories = categories()
+  categories.each do |category|
+    # process every page in category
+  end
 end
 
 def update_retail
+  categories = categories()
+  categories.each do |category|
+  # process every page in category
+  end
 end
 
 def categories
