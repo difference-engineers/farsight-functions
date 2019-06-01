@@ -55,8 +55,10 @@ def parse_retail(url)
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
   raw.css('div.itemContentWrapper').each do |card|
     # add handling for unusual cards: prerelease promos, con promos, buy a box, etc
-    cardname     =
-    set          =
+    cardname     = card.css('span.productDetailTitle').text
+    raw_set      = card.css('div.productDetailSet').text.strip
+    parsed_set   = raw_set.split(/\((C|U|R|M|P|S)\)/)
+    set          = parsed_set[0]
     nm_inventory =
     ex_inventory =
     vg_inventory =
