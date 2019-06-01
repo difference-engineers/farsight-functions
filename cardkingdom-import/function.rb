@@ -65,6 +65,7 @@ def parse_retail(url)
     ex_price     =
     vg_price     =
     g_price      =
+  end
 end
 
 def next_page(raw_nokogiri)
