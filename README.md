@@ -21,4 +21,4 @@ For example, lets say we wanted a service that cleaned up old data. It would be 
   0. Click the "Create pull request" button
   0. Click the "Gitpod" button
 
-You'll know the process has worked because once gitpod has fully started your environment you should have a commit waiting to be pushed (see: `git status`), so push that commit up. That commit should remove the DRAFT file, add a line to the FUNCTIONS file (with your service name), have created a directory based on the name of your service, and much more.
+You'll know the process has worked because once gitpod has fully started your environment you should have a new commit on the pull request history (see: `git log`). That commit should remove the DRAFT file, add a line to the FUNCTIONS file (with your service name), have created a directory based on the name of your service, and much more.
