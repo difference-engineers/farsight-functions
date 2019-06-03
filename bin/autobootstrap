@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+
+if File.exist?("DRAFT")
+  name = File.read("DRAFT").chomp.gsub(/(\W|\.)/, "-")
+  system("mkdir #{name}/")
+  system("cp -r _template/* #{name}/")
+  system("cd #{name} && ln -sfF ../.tool-versions .tool-versions")
+  File.write(File.join(name, "Dockerfile"), File.read(File.join(name, "Dockerfile")).gsub("{{name}}", name))
+  File.write("FUNCTIONS", [**File.read("FUNCTIONS").split("\n"), name].join("\n"))
+  system("git add FUNCTIONS")
+  system("git rm DRAFT")
+  system("git commit -m 'Finalizing the creation of #{name}'")
+end
