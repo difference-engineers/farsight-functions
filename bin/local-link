@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+File.read("FUNCTIONS").split("\n").each do |name|
+  system("cd #{name} && ln -svfF ../_base/db/ .")
+  system("cd #{name} && ln -svfF ../_base/boot.rb")
+  system("cd #{name} && ln -svfF ../_base/config.ru")
+  system("cd #{name} && ln -svfF ../_base/configuration.rb")
+  system("cd #{name} && ln -svfF ../_base/application.rb")
+  system("cd #{name} && ln -svfF ../_base/database.rb")
+  system("cd #{name} && ln -svfF ../_base/Rakefile")
+end

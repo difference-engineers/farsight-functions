@@ -6,7 +6,7 @@ require "json"
 
 token = `gcloud config config-helper --format="value(credential.access_token)"`.chomp
 
-Dir["*/function.rb"].map {|path| path.split("/").first}.each do |name|
+File.read("FUNCTIONS").split("\n").each do |name|
   url = URI("https://cloudbuild.googleapis.com/v1/projects/farsight-239605/triggers")
   http = Net::HTTP.new(url.host, url.port)
   http.use_ssl = true
