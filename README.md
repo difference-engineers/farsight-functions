@@ -13,10 +13,10 @@ For example, lets say we wanted a service that cleaned up old data. It would be 
   0. Go to github.com/difference-engineers/farsight-functions
   0. Click the "Create new file" button
   0. Call it "DRAFT"
-  0. Enter the name of your new service into the contents of the file
+  0. Enter the name of your new service into the contents of the file (eg "initial-mtgjson-import")
   0. Name the branch after the service name (eg "initial-mtgjson-import")
   0. Click "Commit new file"
-  0. Rename the pull request title to be named after the service name (eg "mtgjson-import")
+  0. Rename the pull request title to be named after the service name (eg "The mtgjson-import service")
   0. Detail a little bit of what you want this service to do
   0. Click the "Create pull request" button
   0. Click the "Gitpod" button
