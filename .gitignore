@@ -15,7 +15,9 @@
 # Ignore secret data
 /.env
 /master.key
-*/db/
+*/db/*
+*/db
+*/boot.rb
 */application.rb
 */configuration.rb
 */config.ru

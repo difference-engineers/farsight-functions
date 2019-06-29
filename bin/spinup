@@ -1,5 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-bin/build &&
-docker-compose build --compress --parallel &&
-docker-compose --compatibility up mtgjson-import
+system("bin/build && docker-compose build --compress --parallel")
+
+File.read("FUNCTIONS").split("\n").each do |name|
+  system("docker-compose --compatibility up #{name}")
+end

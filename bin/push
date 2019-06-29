@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 docker push us.gcr.io/$1/base:latest
 docker push us.gcr.io/$1/base:$2
 if [ $3 ]

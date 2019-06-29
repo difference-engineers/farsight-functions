@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+docker build \
+  --cache-from us.gcr.io/farsight-239605/base:latest \
+  --tag us.gcr.io/farsight-239605/base:`git rev-parse --short HEAD 2> /dev/null` \
+  _base
+
+if [ $1 ]
+  then
+  docker build \
+    --cache-from us.gcr.io/farsight-239605/base:latest \
+    --tag farsight-functions_$1 \
+    --tag us.gcr.io/farsight-239605/$1:`git rev-parse --short HEAD 2> /dev/null` \
+    $1
+fi

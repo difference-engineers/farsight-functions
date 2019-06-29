@@ -1,12 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-source .local-env &&
-_services/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh &&
-cd mtgjson-import &&
-ln -svfF ../_base/db/* db/ &&
-ln -svfF ../_base/boot.rb boot.rb &&
-ln -svfF ../_base/config.ru config.ru &&
-ln -svfF ../_base/configuration.rb configuration.rb &&
-ln -svfF ../_base/database.rb database.rb &&
-ln -svfF ../_base/Rakefile Rakefile &&
-bundle exec rake db:setup
+require "open3"
+
+Open3.popen2('/usr/bin/env bash --login') do |stdin|
+  stdin.puts("source .local-env")
+  stdin.puts("bin/local-link")
+
+  File.read("FUNCTIONS").split("\n").each do |name|
+    stdin.puts("cd #{name}")
+    stdin.puts("bundle install")
+    stdin.puts("FUNCTION=#{name} VERSION=0 bundle exec rake db:setup")
+    stdin.puts("cd -")
+  end
+end

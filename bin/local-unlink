@@ -1,8 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-unlink mtgjson-import/_base/db/ &&
-unlink mtgjson-import/_base/boot.rb &&
-unlink mtgjson-import/_base/config.ru &&
-unlink mtgjson-import/_base/configuration.rb &&
-unlink mtgjson-import/_base/database.rb &&
-unlink mtgjson-import/_base/Rakefile
+File.read("FUNCTIONS").split("\n").each do |name|
+  system("unlink #{name}/db/")
+  system("unlink #{name}/boot.rb")
+  system("unlink #{name}/config.ru")
+  system("unlink #{name}/configuration.rb")
+  system("unlink #{name}/application.rb")
+  system("unlink #{name}/database.rb")
+  system("unlink #{name}/Rakefile")
+end

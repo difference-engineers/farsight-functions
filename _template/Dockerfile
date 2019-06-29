@@ -1,6 +1,6 @@
 FROM us.gcr.io/farsight-239605/base:latest
 
-ENV FUNCTION "mtgjson-import"
+ENV FUNCTION "{{name}}"
 
 WORKDIR /home/root/application/
 
