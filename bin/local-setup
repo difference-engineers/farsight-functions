@@ -1,15 +1,8 @@
 #!/usr/bin/env ruby
 
-require "open3"
-
-Open3.popen2('/usr/bin/env bash --login') do |stdin|
-  stdin.puts("source .local-env")
-  stdin.puts("bin/local-link")
-
-  File.read("FUNCTIONS").split("\n").each do |name|
-    stdin.puts("cd #{name}")
-    stdin.puts("bundle install")
-    stdin.puts("FUNCTION=#{name} VERSION=0 bundle exec rake db:setup")
-    stdin.puts("cd -")
-  end
+system("bin/local-link")
+system("bin/local-link")
+File.read("FUNCTIONS").split("\n").each do |name|
+  system("bin/local #{name} bundle install")
+  system("FUNCTION=#{name} VERSION=0 bin/local rake db:setup")
 end
