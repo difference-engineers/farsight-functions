@@ -3,5 +3,5 @@
 system("bin/local-link")
 File.read("FUNCTIONS").split("\n").each do |name|
   system("bin/local #{name} bundle install")
-  system("FUNCTION=#{name} VERSION=0 bin/local rake db:setup")
+  system("bin/local #{name} bundle exec rake db:setup")
 end

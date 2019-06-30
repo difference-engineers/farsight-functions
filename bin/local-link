@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 File.read("FUNCTIONS").split("\n").each do |name|
+  puts "Creating links for #{name}/..."
   system("bin/local #{name} ln -svfF ../_base/db/ .")
   system("bin/local #{name} ln -svfF ../_base/boot.rb")
   system("bin/local #{name} ln -svfF ../_base/config.ru")

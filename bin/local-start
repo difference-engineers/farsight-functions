@@ -4,4 +4,4 @@ set -e
 
 function=$1
 
-bin/local $function falcon serve --bind 'http://0.0.0.0:8080' --threaded --count $CONCURRENCY
+bin/local $function bundle exec falcon serve --bind 'http://0.0.0.0:8080' --threaded --count $CONCURRENCY
