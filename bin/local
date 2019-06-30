@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+function=$1
+shift
+
+source .local-env &&
+cd $function &&
+FUNCTION=$function VERSION=0 "$@" &>/dev/null

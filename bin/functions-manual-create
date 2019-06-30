@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-
-
 puts "What's the name of this function?"
 name = gets.chomp.gsub(/(\W|\.)/, "-")
 system("mkdir #{name}/")
