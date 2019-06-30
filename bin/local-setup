@@ -2,6 +2,8 @@
 
 system("bin/local-link")
 File.read("FUNCTIONS").split("\n").each do |name|
+  puts "Installing gems for #{name}..."
   system("bin/local #{name} bundle install")
+  puts "Setting up database for #{name}..."
   system("bin/local #{name} bundle exec rake db:setup")
 end

@@ -2,11 +2,11 @@
 
 File.read("FUNCTIONS").split("\n").each do |name|
   puts "Creating links for #{name}/..."
-  system("bin/local #{name} ln -svfF ../_base/db/ .")
-  system("bin/local #{name} ln -svfF ../_base/boot.rb")
-  system("bin/local #{name} ln -svfF ../_base/config.ru")
-  system("bin/local #{name} ln -svfF ../_base/configuration.rb")
-  system("bin/local #{name} ln -svfF ../_base/application.rb")
-  system("bin/local #{name} ln -svfF ../_base/database.rb")
-  system("bin/local #{name} ln -svfF ../_base/Rakefile")
+  system("bin/local #{name} ln -svfF ../_base/db/ .  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/boot.rb  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/config.ru  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/configuration.rb  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/application.rb  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/database.rb  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/Rakefile  &>/dev/null")
 end
