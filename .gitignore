@@ -16,6 +16,9 @@
 /.env
 /master.key
 */db/*
+*/db
+!_base/db/*
+!_base/db
 */boot.rb
 */application.rb
 */configuration.rb
