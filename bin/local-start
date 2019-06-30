@@ -2,4 +2,6 @@
 
 set -e
 
-FUNCTION=$1 VERSION=0 bin/local $1 falcon serve --bind 'http://0.0.0.0:8080' --threaded --count $CONCURRENCY
+function=$1
+
+bin/local $function falcon serve --bind 'http://0.0.0.0:8080' --threaded --count $CONCURRENCY
