@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 system("bin/local-link")
-system("bin/local-link")
 File.read("FUNCTIONS").split("\n").each do |name|
   system("bin/local #{name} bundle install")
   system("FUNCTION=#{name} VERSION=0 bin/local rake db:setup")
