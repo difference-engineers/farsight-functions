@@ -7,4 +7,4 @@ shift
 
 source .local-env &&
 cd $function &&
-FUNCTION=$function VERSION=0 bundle exec "$@"
+FUNCTION=$function VERSION=0 "$@"
