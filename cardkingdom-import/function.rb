@@ -80,3 +80,16 @@ def next_page(raw_nokogiri)
   url = raw_nokogiri.css('li.pagination').last.href
   url if last_li == "»" else false end
 end
+
+def every_page (url)
+  every_page = []
+
+  raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
+  count = raw_nokogiri.css('ul.pagination').css('li').count
+  pages = raw_nokogiri.css('ul.pagination').css('li')[count - 2].children.text.strip.to_i
+
+  binding.pry
+  (1..pages).each do |page|
+      #every_page.push("https://www.cardkingdom.com/purchasing/mtg_singles?filter%5Bipp%5D=100&filter%5Bsort%5D=name&filter%5Bnonfoil%5D=1&filter%5Bfoil%5D=1&page=#{page}")
+  end
+end
