@@ -78,7 +78,7 @@ def next_page(raw_nokogiri)
   # search for pagination element with "»"
   last_li = raw_nokogiri.css('li.pagination').last.inner_text
   url = raw_nokogiri.css('li.pagination').last.href
-  url if last_li == "»" else false end
+  url if last_li == "»" end
 end
 
 def every_page (url)
