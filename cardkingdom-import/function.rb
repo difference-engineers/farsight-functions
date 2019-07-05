@@ -5,14 +5,20 @@ end
 def update_buylist
   categories = categories()
   categories.each do |category|
-    # process every page in category
+    pages.each do |page|
+      cards.each do |card|
+      end
+    end
   end
 end
 
 def update_retail
   categories = categories()
   categories.each do |category|
-  # process every page in category
+    pages.each do |page|
+      cards.each do |card|
+      end
+    end
   end
 end
 
@@ -74,13 +80,6 @@ def parse_retail(url)
   end
 end
 
-def next_page(raw_nokogiri)
-  # search for pagination element with "»"
-  last_li = raw_nokogiri.css('li.pagination').last.inner_text
-  url = raw_nokogiri.css('li.pagination').last.href
-  url if last_li == "»" end
-end
-
 def every_page (url)
   every_page = []
 
@@ -88,7 +87,6 @@ def every_page (url)
   count = raw_nokogiri.css('ul.pagination').css('li').count
   pages = raw_nokogiri.css('ul.pagination').css('li')[count - 2].children.text.strip.to_i
 
-  binding.pry
   (1..pages).each do |page|
       #every_page.push("https://www.cardkingdom.com/purchasing/mtg_singles?filter%5Bipp%5D=100&filter%5Bsort%5D=name&filter%5Bnonfoil%5D=1&filter%5Bfoil%5D=1&page=#{page}")
   end
