@@ -59,14 +59,18 @@ def parse_retail(url)
     raw_set      = card.css('div.productDetailSet').text.strip
     parsed_set   = raw_set.split(/\((C|U|R|M|P|S)\)/)
     set          = parsed_set[0]
-    nm_inventory =
-    ex_inventory =
-    vg_inventory =
-    g_inventory  =
-    nm_price     =
-    ex_price     =
-    vg_price     =
-    g_price      =
+
+    nm_inventory = card.css('ul.addToCartByType').css('li.NM').css('div.amtAndPrice').css('span.styleQty').inner_text
+    nm_price     = card.css('ul.addToCartByType').css('li.NM').css('div.amtAndPrice').css('span.stylePrice').inner_text.strip
+
+    ex_inventory = card.css('ul.addToCartByType').css('li.EX').css('div.amtAndPrice').css('span.styleQty').inner_text
+    ex_price     = card.css('ul.addToCartByType').css('li.EX').css('div.amtAndPrice').css('span.stylePrice').inner_text.strip
+
+    vg_inventory = card.css('ul.addToCartByType').css('li.VG').css('div.amtAndPrice').css('span.styleQty').inner_text.strip
+    vg_price     = card.css('ul.addToCartByType').css('li.VG').css('div.amtAndPrice').css('span.stylePrice').inner_text.strip
+
+    g_inventory = card.css('ul.addToCartByType').css('li.G').css('div.amtAndPrice').css('span.styleQty').inner_text.strip
+    g_price     = card.css('ul.addToCartByType').css('li.G').css('div.amtAndPrice').css('span.stylePrice').inner_text.strip
   end
 end
 
