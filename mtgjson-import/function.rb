@@ -7,6 +7,6 @@ def function(response:, router:, database:)
   changeset = mtgjson_imports.changeset(:create, {"imported_at" => Time.now, 'raw' => json })
   changeset.commit
 
-  response.write(cards.count.to_s)
+  response.write(mtgjson_imports.count.to_s)
   response.status = :ok
 end
