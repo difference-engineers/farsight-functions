@@ -84,10 +84,16 @@ def every_page (url)
   every_page = []
 
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
-  count = raw_nokogiri.css('ul.pagination').css('li').count
-  pages = raw_nokogiri.css('ul.pagination').css('li')[count - 2].children.text.strip.to_i
+
+  count = raw.css('ul.pagination').css('li').count
+  pages = raw.css('ul.pagination').css('li')[count - 2].children.text.strip.to_i
 
   (1..pages).each do |page|
       #every_page.push("https://www.cardkingdom.com/purchasing/mtg_singles?filter%5Bipp%5D=100&filter%5Bsort%5D=name&filter%5Bnonfoil%5D=1&filter%5Bfoil%5D=1&page=#{page}")
+  end
+
+  separate_foil_pages = true unless url.include? "/purchasing/"
+  if (separate_foil_pages)
+    foil_url = url.sub(\/singles, "/foils")
   end
 end
