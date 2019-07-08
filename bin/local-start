@@ -2,4 +2,4 @@
 
 set -e
 
-bin/local $1 "bundle exec falcon serve --bind 'http://0.0.0.0:8080' --threaded --count ${CONCURRENCY:-1}"
+bin/local $1 "bundle exec falcon serve --bind http://0.0.0.0:8080 --threaded --count ${CONCURRENCY:-1}"
