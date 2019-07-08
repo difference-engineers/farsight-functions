@@ -18,8 +18,8 @@
 
 # Ignore linked inforamtion
 */db/
-*/sorbet/
-*/.rubocop/
+*/sorbet
+*/.rubocop
 */boot.rb
 */application.rb
 */configuration.rb
