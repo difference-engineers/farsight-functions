@@ -1,6 +1,6 @@
-require "securerandom"
-require "rubygems"
-require "bundler"
+require("securerandom")
+require("rubygems")
+require("bundler")
 
 $stdout.sync = true
 $stderr.sync = true
