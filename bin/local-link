@@ -3,6 +3,11 @@
 File.read("SERVICES").split("\n").each do |name|
   puts "Creating links for #{name}/..."
   system("bin/local #{name} ln -svfF ../_base/db/ .  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/.rubocop/ .  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/sorbet/ .  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../.tool-versions  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/Gemfile  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/Gemfile.lock  &>/dev/null")
   system("bin/local #{name} ln -svfF ../_base/boot.rb  &>/dev/null")
   system("bin/local #{name} ln -svfF ../_base/config.ru  &>/dev/null")
   system("bin/local #{name} ln -svfF ../_base/configuration.rb  &>/dev/null")
