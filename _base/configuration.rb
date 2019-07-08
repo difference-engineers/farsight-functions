@@ -1,3 +1,4 @@
+# typed: ignore
 SERVICE = ENV.fetch("SERVICE") {ENV.fetch("K_SERVICE")}
 VERSION = ENV.fetch("VERSION") {ENV.fetch("K_REVISION").split(".").last}
 PRODUCTION = ENV.fetch("DEPLOY_ENV") == "production"

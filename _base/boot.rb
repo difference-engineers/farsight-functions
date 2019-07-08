@@ -1,3 +1,4 @@
+# typed: false
 require("securerandom")
 require("rubygems")
 require("bundler")

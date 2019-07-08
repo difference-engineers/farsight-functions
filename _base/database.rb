@@ -1,3 +1,4 @@
+# typed: ignore
 CONFIGURATION = {
   :encoding => "UTF8",
   :username => ENV.fetch("POSTGRES_USERNAME"),

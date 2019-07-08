@@ -1,3 +1,4 @@
+# typed: ignore
 class Application < Roda
   plugin(:delete_empty_headers)
   plugin(:request_headers)

@@ -1,3 +1,4 @@
+# typed: true
 def function(response:, router:, database:)
   uri = URI("https://mtgjson.com/json/AllCards.json")
   document = Net::HTTP.get(uri)
