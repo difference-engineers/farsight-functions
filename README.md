@@ -2,6 +2,28 @@
 
 A framework for serverless ruby on top of cloud run and also a collection of services for the farsight service.
 
+
+## tools
+
+*bin/local {{service}} {{command}}*
+
+```
+bin/local mtgjson-import ls
+bin/local mtgjson-import cat Gemfile
+```
+
+Runs an arbitrary command inside of a service.
+
+
+*bin/local-pry {{service}}*
+
+```
+bin/local-pry mtgjson-import
+```
+
+Creates a pry session with the entire context of the service loaded.
+
+
 ## services
 
 A service (or sometimes called function) is a singular semi-isolated piece of code that does one job. It has access to the request, the response, the router, a client list, and a database. Using these pieces the service will do some operation.
@@ -21,4 +43,4 @@ For example, lets say we wanted a service that cleaned up old data. It would be 
   0. Click the "Create pull request" button
   0. Click the "Gitpod" button
 
-You'll know the process has worked because once gitpod has fully started your environment you should have a new commit on the pull request history (see: `git log`). That commit should remove the DRAFT file, add a line to the FUNCTIONS file (with your service name), have created a directory based on the name of your service, and much more.
+You'll know the process has worked because once gitpod has fully started your environment you should have a new commit on the pull request history (see: `git log`). That commit should remove the DRAFT file, add a line to the SERVICES file (with your service name), have created a directory based on the name of your service, and much more.

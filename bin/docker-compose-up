@@ -2,6 +2,6 @@
 
 system("bin/build && docker-compose build --compress --parallel")
 
-File.read("FUNCTIONS").split("\n").each do |name|
+File.read("SERVICES").split("\n").each do |name|
   system("docker-compose --compatibility up #{name}")
 end

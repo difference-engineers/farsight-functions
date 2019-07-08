@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+service=$1
+
+bin/local $service bundle exec pry \
+  --require "./boot" \
+  --require "./configuration" \
+  --require "./application" \
+  --require "./database" \
+  --require "./function"
