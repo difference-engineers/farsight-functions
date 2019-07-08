@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+service=$1
+
+bin/local $service "bundle exec rubocop --config .rubocop/config.yml"
