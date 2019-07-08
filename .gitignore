@@ -15,14 +15,20 @@
 # Ignore secret data
 /.env
 /master.key
-*/db/*
-*/db
-!_base/db/*
-!_base/db
+
+# Ignore linked inforamtion
+*/db/
+*/sorbet/
+*/.rubocop/
 */boot.rb
 */application.rb
 */configuration.rb
 */config.ru
 */database.rb
+*/Gemfile
+*/Gemfile.lock
 */Rakefile
+*/.tool-versions
+
+# _base looks like linked information, but isn't
 !_base/*
