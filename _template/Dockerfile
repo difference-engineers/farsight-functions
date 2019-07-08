@@ -1,6 +1,6 @@
 FROM us.gcr.io/farsight-239605/base:latest
 
-ENV FUNCTION "{{name}}"
+ENV SERVICE "{{name}}"
 
 WORKDIR /home/root/application/
 

@@ -6,7 +6,7 @@ require "json"
 
 token = `gcloud config config-helper --format="value(credential.access_token)"`.chomp
 
-File.read("FUNCTIONS").split("\n").each do |name|
+File.read("SERVICES").split("\n").each do |name|
   url = URI("https://cloudbuild.googleapis.com/v1/projects/farsight-239605/triggers")
   http = Net::HTTP.new(url.host, url.port)
   http.use_ssl = true
@@ -22,9 +22,9 @@ File.read("FUNCTIONS").split("\n").each do |name|
       branchName: "master"
     },
     substitutions: {
-      "_FUNCTION_ID" => name
+      "_SERVICE_ID" => name
     },
-    description: "Push to master branch",
+    description: "Push to master branch (#{name})",
     filename: "_gcloud/cloudbuild.yaml"
   })
 
