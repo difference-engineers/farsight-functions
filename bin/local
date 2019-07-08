@@ -4,6 +4,8 @@ set -e
 
 service=$1
 
+[ -z "$service" ] && echo "You have to specify the service" && exit 126
+
 shift
 
 source .local-env &&
