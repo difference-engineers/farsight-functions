@@ -2,7 +2,8 @@
 
 set -e
 
-function=$1
+service=$1
+
 shift
 
 source .local-env &&
