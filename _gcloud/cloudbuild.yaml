@@ -2,8 +2,8 @@
 images:
   - "us.gcr.io/$PROJECT_ID/base:latest"
   - "us.gcr.io/$PROJECT_ID/base:$SHORT_SHA"
-  - "us.gcr.io/$PROJECT_ID/$_FUNCTION_ID:latest"
-  - "us.gcr.io/$PROJECT_ID/$_FUNCTION_ID:$SHORT_SHA"
+  - "us.gcr.io/$PROJECT_ID/$_SERVICE_ID:latest"
+  - "us.gcr.io/$PROJECT_ID/$_SERVICE_ID:$SHORT_SHA"
 timeout: "5m"
 steps:
   - name: "gcr.io/cloud-builders/docker"
@@ -15,19 +15,19 @@ steps:
     entrypoint: "sh"
     args:
       - "-c"
-      - "docker pull us.gcr.io/$PROJECT_ID/$_FUNCTION_ID:latest || exit 0"
+      - "docker pull us.gcr.io/$PROJECT_ID/$_SERVICE_ID:latest || exit 0"
   - name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/build $PROJECT_ID $SHORT_SHA $_FUNCTION_ID"
+      - "bin/build $PROJECT_ID $SHORT_SHA $_SERVICE_ID"
   - name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/push $PROJECT_ID $SHORT_SHA $_FUNCTION_ID"
+      - "bin/push $PROJECT_ID $SHORT_SHA $_SERVICE_ID"
   - name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/ship $PROJECT_ID $SHORT_SHA $_FUNCTION_ID"
+      - "bin/ship $PROJECT_ID $SHORT_SHA $_SERVICE_ID"

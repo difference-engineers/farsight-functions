@@ -2,9 +2,12 @@
 
 set -e
 
-function=$1
+service=$1
+
+[ -z "$service" ] && echo "You have to specify the service" && exit 126
+
 shift
 
 source .local-env &&
-cd $function &&
-FUNCTION=$function VERSION=0 "$@" &>/dev/null
+cd $service &&
+SERVICE=$service VERSION=0 "$@"
