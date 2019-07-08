@@ -1,0 +1,35 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+ruby "2.6.3"
+
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+
+gem "roda", "~> 3.20"
+gem "falcon", "~> 0.30.0"
+gem "pg", "~> 1.1"
+gem "rom", "~> 5.0"
+gem "rom-sql", "~> 3.0"
+gem "semantic_logger", "~> 4.5"
+gem "rake", "~> 12.3"
+gem "async-http", "~> 0.40.3"
+
+group :production do
+  gem "stackdriver", "~> 0.15.3", require: [
+    "stackdriver",
+    "google/cloud/debugger",
+    "google/cloud/trace",
+    "google/cloud/error_reporting",
+    "google/cloud/logging"
+  ]
+end
+
+group :development do
+  gem "rubocop", "~> 0.72.0"
+  gem "rubocop-rspec", "~> 1.33"
+  gem "rubocop-performance", "~> 1.4"
+  gem "rubocop-thread_safety", "~> 0.3.4"
+  gem "sorbet", "~> 0.4.4394"
+  gem "sorbet-runtime", "~> 0.4.4394"
+end
