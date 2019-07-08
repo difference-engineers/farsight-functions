@@ -31,7 +31,6 @@ gem "pry-remote", "~> 0.1.8"
 
 gem "pry-stack_explorer", "~> 0.4.9"
 
-gem "pry-syntax-hacks", "~> 0.0.6"
 
 gem "pry-rescue", "~> 1.5"
 
