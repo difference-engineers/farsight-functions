@@ -77,7 +77,7 @@ def parse_retail(url)
   end
 end
 
-def every_page (url)
+def every_page(url)
   every_page = []
 
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
