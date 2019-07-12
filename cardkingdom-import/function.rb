@@ -3,8 +3,7 @@ def function(response:, router:, database:)
 end
 
 def update_buylist
-  categories = categories()
-  categories.each do |category|
+  categories().each do |category|
     pages.each do |page|
       cards.each do |card|
       end
@@ -13,8 +12,7 @@ def update_buylist
 end
 
 def update_retail
-  categories = categories()
-  categories.each do |category|
+  categories().each do |category|
     pages.each do |page|
       cards.each do |card|
       end
