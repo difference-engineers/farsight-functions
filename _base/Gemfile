@@ -42,3 +42,7 @@ group(:development) do
   gem("pry-loudmouth", "~> 0.1.0")
   gem("pry-auto_benching.rb", "~> 3.2")
 end
+
+gem("nokogiri", "~> 1.10", :group => :"cardkingdom-import")
+
+gem("monetize", "~> 1.9")

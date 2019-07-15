@@ -26,9 +26,11 @@ def categories
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
   sets = []
   discard = ["All Editions", "Standard", "Modern"]
-  raw.css('div#editionContainer').css('option').each do |set|
-    if !(discard.include?(set.children.text))
-      sets.push set["value"].to_i, set.children.text.strip
+  raw.css("div#editionContainer").css("option").each do |set|
+    unless discard.include?(set.children.text)
+      sets.push(Integer(set["value"], 10), set.children.text.strip)
+  end
+    sets
   end
   sets
 end
@@ -43,70 +45,81 @@ end
 def parse_buylist(url)
   puts "parsing #{url}\n"
 
-  raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
-  raw.css('div.itemContentWrapper').each do |card|
+  def parse_buylist(url)
+    vendor = find(:vendors, :slug => "cardkingdom")
+    puts("parsing #{url}\n")
 
-    cardname     = card.css('span.productDetailTitle').inner_text
-    raw_set      = card.css('div.productDetailSet').css('a').inner_text.strip
-    cash_dollars = card.css('.usdSellPrice').css('span.sellDollarAmount').inner_text
-    cash_cents   = card.css('.usdSellPrice').css('span.sellCentsAmount').inner_text
-    parsed_set   = raw_set.split(/\((C|U|R|M|P|S)\)/)
-    set          = parsed_set[0]
-    foil         = parsed_set[2]
-    foil         = (foil == nil) ? "0" : "1"
-    cash         = cash_dollars + "." + cash_cents
+    raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
+    raw.css("div.itemContentWrapper").each do |card|
+      cardname = card.css("span.productDetailTitle").inner_text
+      raw_set      = card.css("div.productDetailSet").css("a").inner_text.strip
+      cash_dollars = card.css(".usdSellPrice").css("span.sellDollarAmount").inner_text
+      cash_cents   = card.css(".usdSellPrice").css("span.sellCentsAmount").inner_text
+      parsed_set   = raw_set.split(/\((C|U|R|M|P|S)\)/)
+      set          = parsed_set[0]
+      foil         = parsed_set[2]
+      foil.nil? ? foil = "0" : foil = "1"
+      cash         = cash_dollars + "." + cash_cents
+      sell         = monetize.parse(cash)
 
-    puts cardname, set, cash, "foil: " + foil, "\n"
+      puts(cardname, set, cash, "foil: " + foil, "\n")
+      card = find(table, {})
+      insert(:card_sell_prices, card, :sell_cents => sell.cents, :sell_currency => sell.currency, :reported_condition => reported_condition, :vendor => vendor)
+    end
   end
-end
 
-def parse_retail(url)
+  def parse_retail(url)
+    temp_url = "https://cardkingdom.com/catalog/view?filter%5Bipp%5D=60&filter%5Bsort%5D=most_popular&filter%5Bsearch%5D=mtg_advanced&filter%5Bcategory_id%5D=3058&filter%5Bmulti%5D%5B0%5D=1&filter%5Btype_mode%5D=any&filter%5Bmanaprod_select%5D=any"
 
-  raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
-  raw.css('div.itemContentWrapper').each do |card|
-    # add handling for unusual cards: prerelease promos, con promos, buy a box, etc
-    cardname     = card.css('span.productDetailTitle').text
-    raw_set      = card.css('div.productDetailSet').text.strip
-    parsed_set   = raw_set.split(/\((C|U|R|M|P|S)\)/)
-    set          = parsed_set[0]
+    raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
+    raw.css("div.itemContentWrapper").each do |card|
+      # add handling for unusual cards: prerelease promos, con promos, buy a box, etc
+      cardname     = card.css("span.productDetailTitle").text
+      raw_set      = card.css("div.productDetailSet").text.strip
+      parsed_set   = raw_set.split(/\((C|U|R|M|P|S)\)/)
+      set          = parsed_set[0]
 
-    nm_inventory = card.css('ul.addToCartByType').css('li.NM').css('div.amtAndPrice').css('span.styleQty').inner_text
-    nm_price     = card.css('ul.addToCartByType').css('li.NM').css('div.amtAndPrice').css('span.stylePrice').inner_text.strip
+      nm_inventory = card.css("ul.addToCartByType").css("li.NM").css("div.amtAndPrice").css("span.styleQty").inner_text
+      nm_price     = card.css("ul.addToCartByType").css("li.NM").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
 
-    ex_inventory = card.css('ul.addToCartByType').css('li.EX').css('div.amtAndPrice').css('span.styleQty').inner_text
-    ex_price     = card.css('ul.addToCartByType').css('li.EX').css('div.amtAndPrice').css('span.stylePrice').inner_text.strip
+      ex_inventory = card.css("ul.addToCartByType").css("li.EX").css("div.amtAndPrice").css("span.styleQty").inner_text
+      ex_price     = card.css("ul.addToCartByType").css("li.EX").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
 
-    vg_inventory = card.css('ul.addToCartByType').css('li.VG').css('div.amtAndPrice').css('span.styleQty').inner_text.strip
-    vg_price     = card.css('ul.addToCartByType').css('li.VG').css('div.amtAndPrice').css('span.stylePrice').inner_text.strip
+      vg_inventory = card.css("ul.addToCartByType").css("li.VG").css("div.amtAndPrice").css("span.styleQty").inner_text.strip
+      vg_price     = card.css("ul.addToCartByType").css("li.VG").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
 
-    g_inventory = card.css('ul.addToCartByType').css('li.G').css('div.amtAndPrice').css('span.styleQty').inner_text.strip
-    g_price     = card.css('ul.addToCartByType').css('li.G').css('div.amtAndPrice').css('span.stylePrice').inner_text.strip
+      g_inventory = card.css("ul.addToCartByType").css("li.G").css("div.amtAndPrice").css("span.styleQty").inner_text.strip
+      g_price     = card.css("ul.addToCartByType").css("li.G").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
+    end
   end
-end
 
+<<<<<<< HEAD
 def every_page(url)
   every_page = []
+=======
+  def every_page(url)
+    every_page = []
+>>>>>>> Let god sort them out
 
-  raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
+    raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
 
-  count = raw.css('ul.pagination').css('li').count
-  pages = raw.css('ul.pagination').css('li')[count - 2].children.text.strip.to_i
+    count = raw.css("ul.pagination").css("li").count
+    pages = Integer(raw.css("ul.pagination").css("li")[count - 2].children.text.strip, 10)
 
-  (1..pages).each do |page|
+    (1..pages).each do |page|
       every_page.push(url + "&page=#{page}")
-  end
-
-  separate_foil_pages = true unless url.include? "/purchasing/"
-  if (separate_foil_pages)
-    foil_url = url.sub(\/singles, "/foils")
+    end
+    separate_foil_pages = true unless url.include?("/purchasing/") end
+  if separate_foil_pages
+    foil_url = url.sub(%r(/singles), "/foils")
   end
 
   foil_raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
 
-  foil_count = raw.css('ul.pagination').css('li').count
-  foil_pages = raw.css('ul.pagination').css('li')[count - 2].children.text.strip.to_i
+  foil_count = raw.css("ul.pagination").css("li").count
+  foil_pages = Integer(raw.css("ul.pagination").css("li")[count - 2].children.text.strip, 10)
 
   (1..foil_pages).each do |page|
-      every_page.push(url + "&page=#{page}")
+    every_page.push(url + "&page=#{page}")
   end
 end
