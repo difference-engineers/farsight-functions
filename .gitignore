@@ -17,7 +17,7 @@
 /master.key
 
 # Ignore linked inforamtion
-*/db/
+*/db
 */sorbet
 */.rubocop
 */boot.rb
