@@ -1,7 +1,0 @@
-export POSTGRES_URI=postgresql:///resources
-export POSTGRES_HOST=localhost
-export POSTGRES_USERNAME=gitpod
-export POSTGRES_PASSWORD=
-export DEPLOY_ENV=development
-export RACK_ENV=development
-export CONCURRENCY=1
