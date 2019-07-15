@@ -12,8 +12,8 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+          keys:
+            - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
       - run:
         name: setup services
         command: bin/local-setup
