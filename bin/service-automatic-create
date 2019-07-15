@@ -1,15 +1,13 @@
 #!/usr/bin/env ruby
 
-
+system("POSTGRES_HOST=localhost POSTGRES_USERNAME=gitpod _services/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh")
 if File.exist?("DRAFT")
-  system("POSTGRES_HOST=localhost POSTGRES_USERNAME=gitpod _services/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh")
   name = File.read("DRAFT").chomp.gsub(/(\W|\.)/, "-")
   system("mkdir #{name}/")
   system("cp -r _template/* #{name}/")
-  system("cd #{name} && ln -sfF ../.tool-versions .tool-versions")
   File.write(File.join(name, "Dockerfile"), File.read(File.join(name, "Dockerfile")).gsub("{{name}}", name))
-  File.write("FUNCTIONS", [*File.read("FUNCTIONS").split("\n"), name].join("\n"))
-  system("git add FUNCTIONS #{name}/")
+  File.write("SERVICES", [*File.read("SERVICES").split("\n"), name].join("\n"))
+  system("git add SERVICES #{name}/")
   system("git rm DRAFT")
   system("git commit -m 'Finalizing the creation of #{name}'")
   system("git push origin HEAD")

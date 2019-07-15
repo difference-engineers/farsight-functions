@@ -1,11 +1,17 @@
 #!/usr/bin/env ruby
 
-File.read("FUNCTIONS").split("\n").each do |name|
-  system("cd #{name} && ln -svfF ../_base/db/ .")
-  system("cd #{name} && ln -svfF ../_base/boot.rb")
-  system("cd #{name} && ln -svfF ../_base/config.ru")
-  system("cd #{name} && ln -svfF ../_base/configuration.rb")
-  system("cd #{name} && ln -svfF ../_base/application.rb")
-  system("cd #{name} && ln -svfF ../_base/database.rb")
-  system("cd #{name} && ln -svfF ../_base/Rakefile")
+File.read("SERVICES").split("\n").each do |name|
+  puts "Creating links for #{name}/..."
+  system("bin/local #{name} ln -svfF ../_base/db/ .  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/.rubocop/ .  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/sorbet/ .  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../.tool-versions  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/Gemfile  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/Gemfile.lock  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/boot.rb  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/config.ru  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/configuration.rb  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/application.rb  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/database.rb  &>/dev/null")
+  system("bin/local #{name} ln -svfF ../_base/Rakefile  &>/dev/null")
 end
