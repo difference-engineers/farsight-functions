@@ -4,7 +4,7 @@ end
 
 def update_buylist
   categories().each do |category|
-    pages.each do |page|
+    every_page().each do |page|
       cards.each do |card|
       end
     end
@@ -13,7 +13,7 @@ end
 
 def update_retail
   categories().each do |category|
-    pages.each do |page|
+    every_page().each do |page|
       cards.each do |card|
       end
     end
