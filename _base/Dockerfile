@@ -13,7 +13,11 @@ COPY configuration.rb .
 COPY application.rb .
 COPY database.rb .
 COPY Rakefile .
+COPY Gemfile .
+COPY Gemfile.lock .
 COPY config.ru .
+
+RUN bundle install --deployment --frozen
 
 EXPOSE 8080
 

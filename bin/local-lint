@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+bin/local $1 "bundle exec rubocop --auto-correct --config .rubocop/config.yml"

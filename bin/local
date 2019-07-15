@@ -3,11 +3,12 @@
 set -e
 
 service=$1
+shift
+
 
 [ -z "$service" ] && echo "You have to specify the service" && exit 126
 
-shift
+echo "[$service] $@"
 
-source .local-env &&
 cd $service &&
-SERVICE=$service VERSION=0 "$@"
+SERVICE=$service VERSION=0 $@

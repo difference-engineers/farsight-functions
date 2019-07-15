@@ -1,23 +1,6 @@
 version: "3.7"
 
 services:
-  traefik:
-    image: "traefik:v1.7.11"
-    command:
-      - "--api"
-      - "--docker"
-      - "--docker.watch"
-      - "--accessLog"
-    ports:
-      - "3000:80"
-      - "8080:8080"
-    labels:
-      traefik.port: "8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    logging:
-      options:
-        max-size: 1m
   postgres:
     image: "postgres:11.2-alpine"
     ports:
@@ -33,24 +16,3 @@ services:
     logging:
       options:
         max-size: 1m
-  mtgjson-import:
-    build:
-      context: ./mtgjson-import/
-    labels:
-      traefik.port: "8080"
-    environment:
-      POSTGRES_URI: "postgresql:///resources"
-      POSTGRES_HOST: "postgres"
-      POSTGRES_USERNAME: "application"
-      POSTGRES_PASSWORD: ""
-      VERSION: "1"
-      DEPLOY_ENV: "development"
-      RACK_ENV: "development"
-      CONCURRENCY: 10
-    logging:
-      options:
-        max-size: 1m
-    deploy:
-      resources:
-        limits:
-          memory: 256m
