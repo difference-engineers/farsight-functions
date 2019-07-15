@@ -1,0 +1,28 @@
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2
+jobs:
+  build:
+    # TODO: bundler env variables --jobs=4 --retry=3
+    docker:
+      - image: circleci/ruby:2.6.3
+      - image: circleci/postgres:11.2
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+      - run:
+        name: setup services
+        command: bin/local-setup
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+      - run: createdb resources
+      - run: bin/local _base bundle exec rake db:reset
+      - run:
+          name: run tooling
+          command: "bin/local-check"
