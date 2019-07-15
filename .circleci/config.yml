@@ -15,14 +15,18 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
       - run:
-        name: setup services
-        command: bin/local-setup
+          name: setup services
+          command: bin/local-setup
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
-      - run: createdb resources
-      - run: bin/local _base bundle exec rake db:reset
+      - run:
+          name: creating database
+          command: createdb resources
+      - run:
+          name: migrating database
+          command: bin/local _base bundle exec rake db:reset
       - run:
           name: run tooling
           command: "bin/local-check"
