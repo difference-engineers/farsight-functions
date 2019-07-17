@@ -10,5 +10,6 @@ shift
 
 echo "[$service] $@"
 
+source .local-env &&
 cd $service &&
 SERVICE=$service VERSION=0 $@
