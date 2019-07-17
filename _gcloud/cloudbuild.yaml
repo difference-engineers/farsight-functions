@@ -20,14 +20,14 @@ steps:
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/build $PROJECT_ID $SHORT_SHA $_SERVICE_ID"
+      - "bin/docker-build $PROJECT_ID $SHORT_SHA $_SERVICE_ID"
   - name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/push $PROJECT_ID $SHORT_SHA $_SERVICE_ID"
+      - "bin/docker-push $PROJECT_ID $SHORT_SHA $_SERVICE_ID"
   - name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "sh"
     args:
       - "-c"
-      - "bin/ship $PROJECT_ID $SHORT_SHA $_SERVICE_ID"
+      - "bin/docker-ship $PROJECT_ID $SHORT_SHA $_SERVICE_ID"

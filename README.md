@@ -44,3 +44,13 @@ For example, lets say we wanted a service that cleaned up old data. It would be 
   0. Click the "Gitpod" button
 
 You'll know the process has worked because once gitpod has fully started your environment you should have a new commit on the pull request history (see: `git log`). That commit should remove the DRAFT file, add a line to the SERVICES file (with your service name), have created a directory based on the name of your service, and much more.
+
+
+## adding gems for a specific service
+
+Sometimes a service will need a specific library that most services wont need. For example, lets say you have a service that turns CSV documents into excel documents. You'll want to add the library like this:
+
+```
+bin/local _base bundle add {{library}} --group={{service}}
+bin/local _base bundle add xlsx-reader --group=csv-to-xlsx
+```

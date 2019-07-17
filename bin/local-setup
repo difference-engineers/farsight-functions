@@ -1,9 +1,5 @@
 #!/usr/bin/env ruby
 
 system("bin/local-link")
-File.read("SERVICES").split("\n").each do |name|
-  puts "Installing gems for #{name}..."
-  system("bin/local #{name} bundle install")
-  puts "Setting up database for #{name}..."
-  system("bin/local #{name} bundle exec rake db:setup")
-end
+system("bin/local _base bundle install")
+system("bin/local _base bundle exec rake db:setup")
