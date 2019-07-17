@@ -3,9 +3,8 @@ def function(response:, router:, database:)
 end
 
 def update_buylist
-  categories = categories()
-  categories.each do |category|
-    pages.each do |page|
+  categories().each do |category|
+    every_page().each do |page|
       cards.each do |card|
       end
     end
@@ -13,9 +12,8 @@ def update_buylist
 end
 
 def update_retail
-  categories = categories()
-  categories.each do |category|
-    pages.each do |page|
+  categories().each do |category|
+    every_page().each do |page|
       cards.each do |card|
       end
     end
@@ -33,6 +31,13 @@ def categories
       sets.push set["value"].to_i, set.children.text.strip
   end
   sets
+end
+
+def buylist_category_urls
+  urls = []
+
+   base_url = "https://cardkingdom.com/purchasing/mtg_singles?filter%5Bipp%5D=100&filter%5Bsort%5D=name&filter%5Bsearch%5D=mtg_advanced\
+               &filter%5Bname%5D=&filter%5Bcategory_id%5D=#{category_id}&filter%5Bfoil%5D=1&filter%5Bnonfoil%5D=1&filter%5Bprice_op%5D=&filter%5Bprice%5D="
 end
 
 def parse_buylist(url)
@@ -56,7 +61,6 @@ def parse_buylist(url)
 end
 
 def parse_retail(url)
-  temp_url = "https://cardkingdom.com/catalog/view?filter%5Bipp%5D=60&filter%5Bsort%5D=most_popular&filter%5Bsearch%5D=mtg_advanced&filter%5Bcategory_id%5D=3058&filter%5Bmulti%5D%5B0%5D=1&filter%5Btype_mode%5D=any&filter%5Bmanaprod_select%5D=any"
 
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
   raw.css('div.itemContentWrapper').each do |card|
@@ -80,7 +84,7 @@ def parse_retail(url)
   end
 end
 
-def every_page (url)
+def every_page(url)
   every_page = []
 
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
