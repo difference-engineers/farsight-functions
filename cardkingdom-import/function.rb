@@ -56,6 +56,7 @@ def parse_buylist(url)
 
     card = find(table, {})
     insert(:card_sell_prices, card, :sell_cents => sell.cents, :sell_currency => sell.currency, :reported_condition => reported_condition, :vendor => vendor)
+  end
 end
 
 
