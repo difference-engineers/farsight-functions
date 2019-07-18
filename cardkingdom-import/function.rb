@@ -43,11 +43,9 @@ def buylist_category_urls
 end
 
 def parse_buylist(url)
-  puts "parsing #{url}\n"
 
   def parse_buylist(url)
     vendor = find(:vendors, :slug => "cardkingdom")
-    puts("parsing #{url}\n")
 
     raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
     raw.css("div.itemContentWrapper").each do |card|
@@ -62,7 +60,6 @@ def parse_buylist(url)
       cash         = cash_dollars + "." + cash_cents
       sell         = monetize.parse(cash)
 
-      puts(cardname, set, cash, "foil: " + foil, "\n")
       card = find(table, {})
       insert(:card_sell_prices, card, :sell_cents => sell.cents, :sell_currency => sell.currency, :reported_condition => reported_condition, :vendor => vendor)
     end
@@ -93,13 +90,8 @@ def parse_buylist(url)
     end
   end
 
-<<<<<<< HEAD
 def every_page(url)
   every_page = []
-=======
-  def every_page(url)
-    every_page = []
->>>>>>> Let god sort them out
 
     raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
 
