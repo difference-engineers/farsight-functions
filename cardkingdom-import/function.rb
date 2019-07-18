@@ -60,29 +60,29 @@ def parse_buylist(url)
 end
 
 
-  def parse_retail(url)
+def parse_retail(url)
 
-    raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
-    raw.css("div.itemContentWrapper").each do |card|
-      # add handling for unusual cards: prerelease promos, con promos, buy a box, etc
-      cardname     = card.css("span.productDetailTitle").text
-      raw_set      = card.css("div.productDetailSet").text.strip
-      parsed_set   = raw_set.split(/\((C|U|R|M|P|S)\)/)
-      set          = parsed_set[0]
+  raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
+  raw.css("div.itemContentWrapper").each do |card|
+    # add handling for unusual cards: prerelease promos, con promos, buy a box, etc
+    cardname     = card.css("span.productDetailTitle").text
+    raw_set      = card.css("div.productDetailSet").text.strip
+    parsed_set   = raw_set.split(/\((C|U|R|M|P|S)\)/)
+    set          = parsed_set[0]
 
-      nm_inventory = card.css("ul.addToCartByType").css("li.NM").css("div.amtAndPrice").css("span.styleQty").inner_text
-      nm_price     = card.css("ul.addToCartByType").css("li.NM").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
+    nm_inventory = card.css("ul.addToCartByType").css("li.NM").css("div.amtAndPrice").css("span.styleQty").inner_text
+    nm_price     = card.css("ul.addToCartByType").css("li.NM").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
 
-      ex_inventory = card.css("ul.addToCartByType").css("li.EX").css("div.amtAndPrice").css("span.styleQty").inner_text
-      ex_price     = card.css("ul.addToCartByType").css("li.EX").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
+    ex_inventory = card.css("ul.addToCartByType").css("li.EX").css("div.amtAndPrice").css("span.styleQty").inner_text
+    ex_price     = card.css("ul.addToCartByType").css("li.EX").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
 
-      vg_inventory = card.css("ul.addToCartByType").css("li.VG").css("div.amtAndPrice").css("span.styleQty").inner_text.strip
-      vg_price     = card.css("ul.addToCartByType").css("li.VG").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
+    vg_inventory = card.css("ul.addToCartByType").css("li.VG").css("div.amtAndPrice").css("span.styleQty").inner_text.strip
+    vg_price     = card.css("ul.addToCartByType").css("li.VG").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
 
-      g_inventory = card.css("ul.addToCartByType").css("li.G").css("div.amtAndPrice").css("span.styleQty").inner_text.strip
-      g_price     = card.css("ul.addToCartByType").css("li.G").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
-    end
+    g_inventory = card.css("ul.addToCartByType").css("li.G").css("div.amtAndPrice").css("span.styleQty").inner_text.strip
+    g_price     = card.css("ul.addToCartByType").css("li.G").css("div.amtAndPrice").css("span.stylePrice").inner_text.strip
   end
+end
 
 def every_page(url)
   every_page = []
