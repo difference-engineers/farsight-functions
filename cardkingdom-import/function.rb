@@ -87,15 +87,15 @@ end
 def every_page(url)
   every_page = []
 
-    raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
+  raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
 
-    count = raw.css("ul.pagination").css("li").count
-    pages = Integer(raw.css("ul.pagination").css("li")[count - 2].children.text.strip, 10)
+  count = raw.css("ul.pagination").css("li").count
+  pages = Integer(raw.css("ul.pagination").css("li")[count - 2].children.text.strip, 10)
 
-    (1..pages).each do |page|
-      every_page.push(url + "&page=#{page}")
-    end
-    separate_foil_pages = true unless url.include?("/purchasing/") end
+  (1..pages).each do |page|
+    every_page.push(url + "&page=#{page}")
+  end
+  separate_foil_pages = true unless url.include?("/purchasing/") end
   if separate_foil_pages
     foil_url = url.sub(%r(/singles), "/foils")
   end
