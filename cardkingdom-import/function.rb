@@ -26,11 +26,13 @@ def categories()
 
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
   sets = []
+  set_ids = []
   discard = ["All Editions", "Standard", "Modern"]
   raw.css("div#editionContainer").css("option").each do |set|
-    sets.push(Integer(set["value"], 10), set.children.text.strip) unless discard.include?(set.children.text)
+    sets.push([Integer(set["value"], 10), set.children.text.strip]) unless discard.include?(set.children.text)
+    set_ids.push([Integer(set["value"], 10), set.children.text.strip]) unless discard.include?(set.children.text)
   end
-  sets
+  set_ids
 end
 
 def buylist_category_urls
