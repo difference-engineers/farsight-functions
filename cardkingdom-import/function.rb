@@ -97,7 +97,7 @@ def every_page(url)
   (1..pages).each do |page|
     every_page.push(url + "&page=#{page}")
   end
-  separate_foil_pages = true unless url.include?("/purchasing/") end
+  separate_foil_pages = true unless url.include?("/purchasing/")
   foil_url = url.sub(%r(/singles), "/foils") if separate_foil_pages
 
   foil_raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
