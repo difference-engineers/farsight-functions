@@ -10,8 +10,7 @@ def update_buylist
 
   category_urls(base_url).each do |category_url|
     every_page(category_url).each do |page|
-      cards.each do |card|
-      end
+      parse_buylist(page)
     end
   end
 end
@@ -22,8 +21,7 @@ def update_retail
 
   category_urls(base_url).each do |category_url|
     every_page(category_url).each do |page|
-      cards.each do |card|
-      end
+      parse_retail(page)
     end
   end
 end
