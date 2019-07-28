@@ -1,11 +1,11 @@
 # typed: true
 def function(response:, router:, database:)
-  uri = URI("https://mtgjson.com/json/AllCards.json")
+  uri = URI("https://mtgjson.com/json/Keywords.json")
   document = Net::HTTP.get(uri)
   json = JSON.parse(document)
 
   mtgjson_imports = database.relations.fetch("mtgjson_imports")
-  changeset = mtgjson_imports.changeset(:create, "imported_at" => Time.now, "raw" => json)
+  changeset = mtgjson_imports.changeset(:create, "type" => "Keywords", "imported_at" => Time.now, "raw" => json)
   changeset.commit
 
   response.write(mtgjson_imports.count.to_s)
