@@ -38,12 +38,12 @@ def set_ids()
   url = "https://cardkingdom.com/search/mtg"
 
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
-  set_ids = []
+
   discard = ["All Editions", "Standard", "Modern"]
-  raw.css("div#editionContainer").css("option").each do |set|
-    set_ids.push(Integer(set["value"], 10)) unless discard.include?(set.children.text)
-  end
-  set_ids
+  raw.css("div#editionContainer").css("option").map do |set|
+    (Integer(set["value"], 10)) unless discard.include?(set.children.text)
+  end.compact
+
 end
 
 def category_urls(base_url)
