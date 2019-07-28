@@ -17,8 +17,11 @@ def update_buylist
 end
 
 def update_retail
-  categories().each do |category|
-  every_page(category_page).each do |page|
+  base_url = "https://www.cardkingdom.com/mtg/5th-edition?filter%5Bipp%5D=60&fi\
+  lter%5Bsort%5D=name"
+
+  category_urls(base_url).each do |category_url|
+    every_page().each do |page|
       cards.each do |card|
       end
     end
