@@ -34,7 +34,6 @@ def set_ids()
   set_ids = []
   discard = ["All Editions", "Standard", "Modern"]
   raw.css("div#editionContainer").css("option").each do |set|
-    #sets.push([Integer(set["value"], 10)), set.children.text.strip]) unless discard.include?(set.children.text)
     set_ids.push(Integer(set["value"], 10)) unless discard.include?(set.children.text)
   end
   set_ids
