@@ -3,7 +3,12 @@ def function(response:, router:, database:)
 end
 
 def update_buylist
-  categories().each do |category|
+  base_url = "https://cardkingdom.com/purchasing/mtg_singles?filter%5Bsort%5D=n\
+  ame&filter%5Bsearch%5D=mtg_advanced&filter%5Bname%5D=&filter%5Bcategory_id%5D\
+  =2864&filter%5Bfoil%5D=1&filter%5Bnonfoil%5D=1&filter%5Bprice_op%5D=&filter%5\
+  Bprice%5D="
+
+  category_urls(base_url).each do |category_url|
     every_page().each do |page|
       cards.each do |card|
       end
