@@ -61,7 +61,7 @@ def parse_buylist(url)
     foil         = parsed_set[2]
     foil.nil? ? foil = "0" : foil = "1"
     cash         = cash_dollars + "." + cash_cents
-    sell         = monetize.parse(cash)
+    #sell         = monetize.parse(cash)
 
     #card = find(table, {})
     #insert(:card_sell_prices, card, :sell_cents => sell.cents, :sell_currency => sell.currency, :reported_condition => reported_condition, :vendor => vendor)
