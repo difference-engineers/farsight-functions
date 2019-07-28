@@ -119,4 +119,5 @@ def every_page(url)
   (1..foil_pages).each do |page|
     every_page.push(url + "&page=#{page}")
   end
+  every_page
 end
