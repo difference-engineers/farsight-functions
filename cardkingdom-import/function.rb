@@ -7,12 +7,13 @@ def update_buylist
   "ame&filter%5Bsearch%5D=mtg_advanced&filter%5Bname%5D=&filter%5Bcategory_id%5D"\
   "=2864&filter%5Bfoil%5D=1&filter%5Bnonfoil%5D=1&filter%5Bprice_op%5D=&filter%5"\
   "Bprice%5D="
-  LOGGER.info("Starting update of buylist.")
+
+  LOGGER.info("Starting update of buylist cardkingdom prices..")
 
   category_urls(base_url).each do |category_url|
     LOGGER.info(".. Processing #{category_url}.")
     every_page(category_url).each do |page|
-      LOGGER.info(".... Processing #{page}.")
+      LOGGER.info(".... Processing page #{page}.")
       parse_buylist(page)
     end
   end
@@ -22,8 +23,12 @@ def update_retail
   base_url = "https://www.cardkingdom.com/mtg/5th-edition?filter%5Bipp%5D=60&fi\
   lter%5Bsort%5D=name"
 
+  LOGGER.info("Starting update of retail cardkingdom prices.")
+
   category_urls(base_url).each do |category_url|
+    LOGGER.info(".. Processing #{category_url}.")
     every_page(category_url).each do |page|
+      LOGGER.info(".... Processing page #{page}.")
       parse_retail(page)
     end
   end
