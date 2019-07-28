@@ -21,7 +21,7 @@ def update_retail
   end
 end
 
-def categories()
+def set_ids()
   url = "https://cardkingdom.com/search/mtg"
 
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
@@ -29,17 +29,19 @@ def categories()
   set_ids = []
   discard = ["All Editions", "Standard", "Modern"]
   raw.css("div#editionContainer").css("option").each do |set|
-    sets.push([Integer(set["value"], 10), set.children.text.strip]) unless discard.include?(set.children.text)
-    set_ids.push([Integer(set["value"], 10), set.children.text.strip]) unless discard.include?(set.children.text)
+    #sets.push([Integer(set["value"], 10)), set.children.text.strip]) unless discard.include?(set.children.text)
+    set_ids.push(Integer(set["value"], 10)) unless discard.include?(set.children.text)
   end
   set_ids
 end
 
-def buylist_category_urls
-  urls = []
-
-  base_url = "https://cardkingdom.com/purchasing/mtg_singles?filter%5Bipp%5D=100&filter%5Bsort%5D=name&filter%5Bsearch%5D=mtg_advanced\
-               &filter%5Bname%5D=&filter%5Bcategory_id%5D=#{category_id}&filter%5Bfoil%5D=1&filter%5Bnonfoil%5D=1&filter%5Bprice_op%5D=&filter%5Bprice%5D="
+def category_urls(base_url)
+  category_urls = []
+  set_ids().each do |set_id|
+    category_url = base_url.gsub(/category_id%5D=([0-9]+)/i, "category_id%5D=#{set_id}")
+    category_urls.push(category_url)
+  end
+  category_urls
 end
 
 def parse_buylist(url)
