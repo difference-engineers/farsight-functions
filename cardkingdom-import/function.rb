@@ -39,12 +39,9 @@ def set_ids()
 end
 
 def category_urls(base_url)
-  category_urls = []
-  set_ids().each do |set_id|
-    category_url = base_url.gsub(/category_id%5D=([0-9]+)/i, "category_id%5D=#{set_id}")
-    category_urls.push(category_url)
+  set_ids().map do |set_id|
+    base_url.gsub(/category_id%5D=([0-9]+)/i, "category_id%5D=#{set_id}")
   end
-  category_urls
 end
 
 def parse_buylist(url)
