@@ -3,13 +3,16 @@ def function(response:, router:, database:)
 end
 
 def update_buylist
-  base_url = "https://cardkingdom.com/purchasing/mtg_singles?filter%5Bsort%5D=n\
-  ame&filter%5Bsearch%5D=mtg_advanced&filter%5Bname%5D=&filter%5Bcategory_id%5D\
-  =2864&filter%5Bfoil%5D=1&filter%5Bnonfoil%5D=1&filter%5Bprice_op%5D=&filter%5\
-  Bprice%5D="
+  base_url = "https://cardkingdom.com/purchasing/mtg_singles?filter%5Bsort%5D=n"\
+  "ame&filter%5Bsearch%5D=mtg_advanced&filter%5Bname%5D=&filter%5Bcategory_id%5D"\
+  "=2864&filter%5Bfoil%5D=1&filter%5Bnonfoil%5D=1&filter%5Bprice_op%5D=&filter%5"\
+  "Bprice%5D="
+  LOGGER.info("Starting update of buylist.")
 
   category_urls(base_url).each do |category_url|
+    LOGGER.info(".. Processing #{category_url}.")
     every_page(category_url).each do |page|
+      LOGGER.info(".... Processing #{page}.")
       parse_buylist(page)
     end
   end
