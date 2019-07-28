@@ -30,7 +30,6 @@ def set_ids()
   url = "https://cardkingdom.com/search/mtg"
 
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
-  sets = []
   set_ids = []
   discard = ["All Editions", "Standard", "Modern"]
   raw.css("div#editionContainer").css("option").each do |set|
