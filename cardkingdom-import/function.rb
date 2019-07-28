@@ -48,7 +48,7 @@ def category_urls(base_url)
 end
 
 def parse_buylist(url)
-  vendor = find(:vendors, :slug => "cardkingdom")
+  #vendor = find(:vendors, :slug => "cardkingdom")
 
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
   raw.css("div.itemContentWrapper").each do |card|
