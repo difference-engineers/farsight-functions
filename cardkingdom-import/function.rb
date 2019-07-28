@@ -63,8 +63,8 @@ def parse_buylist(url)
     cash         = cash_dollars + "." + cash_cents
     sell         = monetize.parse(cash)
 
-    card = find(table, {})
-    insert(:card_sell_prices, card, :sell_cents => sell.cents, :sell_currency => sell.currency, :reported_condition => reported_condition, :vendor => vendor)
+    #card = find(table, {})
+    #insert(:card_sell_prices, card, :sell_cents => sell.cents, :sell_currency => sell.currency, :reported_condition => reported_condition, :vendor => vendor)
   end
 end
 
