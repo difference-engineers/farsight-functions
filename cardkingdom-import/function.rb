@@ -9,7 +9,7 @@ def update_buylist
   Bprice%5D="
 
   category_urls(base_url).each do |category_url|
-    every_page().each do |page|
+    every_page(category_url).each do |page|
       cards.each do |card|
       end
     end
@@ -21,7 +21,7 @@ def update_retail
   lter%5Bsort%5D=name"
 
   category_urls(base_url).each do |category_url|
-    every_page().each do |page|
+    every_page(category_url).each do |page|
       cards.each do |card|
       end
     end
@@ -48,7 +48,7 @@ def category_urls(base_url)
     category_url = base_url.gsub(/category_id%5D=([0-9]+)/i, "category_id%5D=#{set_id}")
     category_urls.push(category_url)
   end
-  category_urls[]
+  category_urls
 end
 
 def parse_buylist(url)
