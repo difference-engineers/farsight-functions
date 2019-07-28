@@ -13,8 +13,7 @@ end
 
 def update_retail
   categories().each do |category|
-    category_page = "https://www.cardkingdom.com/catalog/view?filter%5Bipp%5D=60&filter%5Bsort%5D=most_popular&filter%5Bsearch%5D=mtg_advanced&filter%5Bcategory_id%5D=#{category}&filter%5Bmulti%5D%5B0%5D=1&filter%5Btype_mode%5D=any&filter%5Bmanaprod_select%5D=any"
-    every_page(category_page).each do |page|
+  every_page(category_page).each do |page|
       cards.each do |card|
       end
     end
@@ -41,7 +40,7 @@ def category_urls(base_url)
     category_url = base_url.gsub(/category_id%5D=([0-9]+)/i, "category_id%5D=#{set_id}")
     category_urls.push(category_url)
   end
-  category_urls
+  category_urls[]
 end
 
 def parse_buylist(url)
