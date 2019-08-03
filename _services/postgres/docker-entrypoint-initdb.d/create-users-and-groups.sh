@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_HOST" --dbname "template1" <<-EOSQL
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USERNAME" --dbname "template1" <<-EOSQL
   CREATE EXTENSION "citext";
   CREATE EXTENSION "pgcrypto";
   CREATE EXTENSION "cube";
