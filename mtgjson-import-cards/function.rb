@@ -10,7 +10,9 @@ def function(request:, response:, database:)
 
   LOGGER.info("Getting table")
   mtgjson_imports = database.relations.fetch("mtgjson_imports")
-  changeset = mtgjson_imports.changeset(:create, "type" => "AllCards", "imported_at" => Time.now, "raw" => json)
+
+  LOGGER.info("Storing cards dump")
+  changeset = mtgjson_imports.changeset(:create, :type => "AllCards", :imported_at => Time.now, :raw => json)
   changeset.commit
 
   LOGGER.info("Finishing")
