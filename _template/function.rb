@@ -1,3 +1,3 @@
-def function(response:, router:, database:)
+def function(request:, response:, database:)
   response.status = :ok
 end
