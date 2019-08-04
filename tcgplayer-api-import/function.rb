@@ -18,5 +18,5 @@ def generate_token
   response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
     http.request(request)
   end
-  binding.pry
+  JSON.parse(response.read_body["access_token"])
 end
