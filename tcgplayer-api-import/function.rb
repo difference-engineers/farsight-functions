@@ -1,5 +1,6 @@
 def function(response:, router:, database:)
   response.status = :ok
+  token = generate_token()
 end
 
 def generate_token
@@ -18,5 +19,5 @@ def generate_token
   response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
     http.request(request)
   end
-  JSON.parse(response.read_body["access_token"])
+  JSON.parse(response.read_body)["access_token"]
 end
