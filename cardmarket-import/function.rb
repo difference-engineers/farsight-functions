@@ -16,3 +16,17 @@ end
 
 def set_slugs
 end
+
+def every_page(set_url)
+  raw = Nokogiri::HTML(Net::HTTP.get(URI(set_url)))
+  return_urls = []
+
+  #still need handling for pages with no pagination, and for urls without site=x
+
+  url_format = "https://www.cardmarket.com"
+  url_format += raw.css("div#pagination").css("a.dropdown-item")[0].attributes["href"].text
+
+  raw.css("div#pagination").css("a.dropdown-item").map do |page|
+    url_format.gsub(/site=[0-9]/, "site=#{page.children.text}")
+  end
+end
