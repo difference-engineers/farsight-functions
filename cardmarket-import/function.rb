@@ -13,3 +13,6 @@ def set_ids
     (Integer(set["value"], 10)) unless discard.include?(set.children.text)
   end.compact
 end
+
+def set_slugs
+end
