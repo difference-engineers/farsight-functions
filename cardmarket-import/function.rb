@@ -30,3 +30,19 @@ def every_page(set_url)
     url_format.gsub(/site=[0-9]/, "site=#{page.children.text}")
   end
 end
+
+def scrape_set(set_url)
+  every_page(set_url).each do |page|
+    LOGGER.info "Scraping data from #{page}"
+    raw = Nokogiri::HTML(Net::HTTP.get(URI(page)))
+    raw.css('div[id^="productRow"]').each do |card|
+      card_name =
+      card_set_number =
+      rarity =
+      available_inventory =
+      lowest_eur =
+      available_inventory_foil =
+      lowest_eur_foil =
+    end
+  end
+end
