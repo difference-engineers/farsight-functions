@@ -52,7 +52,17 @@ def scrape_set(set_url)
 end
 
 def scrape_card_page(url)
-  LOGGER.info "Scraping card data from #{page}"
-  raw = Nokogiri::HTML(Net::HTTP.get(URI(page)))
+  LOGGER.info "Scraping card data from #{url}"
+  raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
   binding.pry
+  card_data = Hash.new
+
+  # basic info
+  card_data["available_inventory"]
+  card_data["lowest_eur"]
+  card_data["price_trend"]
+  card_data["thirty_day_average_price"]
+  card_data["seven_day_average_price"]
+
+  # seller inventories
 end
