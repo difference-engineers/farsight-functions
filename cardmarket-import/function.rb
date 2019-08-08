@@ -75,8 +75,7 @@ def scrape_card_page(url)
   seller_inv_data["seller_condition"]
   seller_inv_data["card_language"]
   seller_inv_data["eur_price"]
+  seller_inv_data["is_foil"]
   seller_inv_data["qty_available"]
   seller_inv_data["seller_type"] # powerseller, professional, private
-
-
 end
