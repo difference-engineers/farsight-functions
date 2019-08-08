@@ -39,6 +39,7 @@ def scrape_set(set_url)
     raw.css('div[id^="productRow"]').each do |card|
       card_data = Hash.new
 
+      card_data["card_url"] = card.css("a")[1]["href"]
       card_data["card_name"] = card.css("div.col-10.col-md-8.px-2.flex-column.align-items-start.justify-content-center").text
       card_data["card_set_number"] = card.css("div.col-md-2.d-none.d-lg-flex.has-content-centered").text
       # rarity = card.css("div.col-sm-2.d-none.d-sm-flex.has-content-centered > span > span")
