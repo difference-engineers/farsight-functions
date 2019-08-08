@@ -58,11 +58,15 @@ def scrape_card_page(url)
   card_data = Hash.new
 
   # basic info
-  card_data["available_inventory"]
-  card_data["lowest_eur"]
-  card_data["price_trend"]
-  card_data["thirty_day_average_price"]
-  card_data["seven_day_average_price"]
+  card_data["available_inventory"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(8)")
+  card_data["lowest_eur"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(10)")
+  card_data["price_trend"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(12) > span")
+  card_data["thirty_day_average_price"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(14) > span")
+  card_data["seven_day_average_price"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(16) > span")
+  card_data["one_day_average_price"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(18) > span")
+
+  # foil info
+    # repeat card data for foils only, if available
 
   # seller inventories
 end
