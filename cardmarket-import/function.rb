@@ -56,17 +56,27 @@ def scrape_card_page(url)
   raw = Nokogiri::HTML(Net::HTTP.get(URI(url)))
   binding.pry
   card_data = Hash.new
+  seller_inv_data = Hash.new
 
   # basic info
-  card_data["available_inventory"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(8)")
-  card_data["lowest_eur"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(10)")
-  card_data["price_trend"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(12) > span")
-  card_data["thirty_day_average_price"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(14) > span")
-  card_data["seven_day_average_price"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(16) > span")
-  card_data["one_day_average_price"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(18) > span")
+  card_data["available_inventory"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(8)").text
+  card_data["lowest_eur"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(10)").text
+  card_data["price_trend"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(12) > span").text
+  card_data["thirty_day_average_price"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(14) > span").text
+  card_data["seven_day_average_price"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(16) > span").text
+  card_data["one_day_average_price"] = raw.css("#tabContent-info > div > div.col-12.col-lg-6.mx-auto > div > div.info-list-container.col-12.col-md-8.col-lg-12.mx-auto.align-self-start > dl > dd:nth-child(18) > span").text
 
   # foil info
     # repeat card data for foils only, if available
 
   # seller inventories
+  seller_inv_data["seller_name"]
+  seller_inv_data["seller_country"]
+  seller_inv_data["seller_condition"]
+  seller_inv_data["card_language"]
+  seller_inv_data["eur_price"]
+  seller_inv_data["qty_available"]
+  seller_inv_data["seller_type"] # powerseller, professional, private
+
+
 end
