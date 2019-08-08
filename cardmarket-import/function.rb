@@ -22,9 +22,10 @@ def every_page(set_url)
   return_urls = []
 
   #still need handling for pages with no pagination, and for urls without site=x
+  #doesn't work when we're on the same &page= as in the url_format line
 
   url_format = "https://www.cardmarket.com"
-  url_format += raw.css("div#pagination").css("a.dropdown-item")[0].attributes["href"].text
+  url_format += raw.css("div#pagination").css("a.dropdown-item")[1].attributes["href"].text
 
   raw.css("div#pagination").css("a.dropdown-item").map do |page|
     url_format.gsub(/site=[0-9]/, "site=#{page.children.text}")
@@ -36,13 +37,15 @@ def scrape_set(set_url)
     LOGGER.info "Scraping data from #{page}"
     raw = Nokogiri::HTML(Net::HTTP.get(URI(page)))
     raw.css('div[id^="productRow"]').each do |card|
-      card_name =
-      card_set_number =
-      rarity =
-      available_inventory =
-      lowest_eur =
-      available_inventory_foil =
-      lowest_eur_foil =
+      card_data = Hash.new
+
+      card_data["card_name"] = card.css("div.col-10.col-md-8.px-2.flex-column.align-items-start.justify-content-center").text
+      card_data["card_set_number"] = card.css("div.col-md-2.d-none.d-lg-flex.has-content-centered").text
+      # rarity = card.css("div.col-sm-2.d-none.d-sm-flex.has-content-centered > span > span")
+      card_data["available_inventory"] = card.css("div.col-availability.px-2 > span").text
+      card_data["lowest_eur"] = card.css("div.col-price.pr-sm-2").text
+      card_data["available_inventory_foil"] = card.css("div.col-availability.d-none.d-lg-flex").text
+      card_data["lowest_eur_foil"] = card.css("div.col-price.d-none.d-lg-flex.pr-lg-2").text
     end
   end
 end
