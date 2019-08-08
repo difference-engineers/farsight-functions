@@ -49,9 +49,10 @@ def scrape_set(set_url)
       card_data["lowest_eur_foil"] = card.css("div.col-price.d-none.d-lg-flex.pr-lg-2").text
     end
   end
+end
 
-  def scrape_card_page(url)
-    LOGGER.info "Scraping card data from #{page}"
-
-  end
+def scrape_card_page(url)
+  LOGGER.info "Scraping card data from #{page}"
+  raw = Nokogiri::HTML(Net::HTTP.get(URI(page)))
+  binding.pry
 end
