@@ -34,7 +34,7 @@ end
 
 def scrape_set(set_url)
   every_page(set_url).each do |page|
-    LOGGER.info "Scraping data from #{page}"
+    LOGGER.info "Scraping set data from #{page}"
     raw = Nokogiri::HTML(Net::HTTP.get(URI(page)))
     raw.css('div[id^="productRow"]').each do |card|
       card_data = Hash.new
@@ -48,5 +48,10 @@ def scrape_set(set_url)
       card_data["available_inventory_foil"] = card.css("div.col-availability.d-none.d-lg-flex").text
       card_data["lowest_eur_foil"] = card.css("div.col-price.d-none.d-lg-flex.pr-lg-2").text
     end
+  end
+
+  def scrape_card_page(url)
+    LOGGER.info "Scraping card data from #{page}"
+
   end
 end
