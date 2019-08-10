@@ -18,13 +18,12 @@ def set_slugs
 end
 
 def every_page(set_url)
-  LOGGER.error("Invalid set url passed, requires the base set url without query strings.")
+  LOGGER.error("Invalid set url passed, requires the base set url without query strings.") if (set_url.include?("?perSite="))
   raw = Nokogiri::HTML(Net::HTTP.get(URI(set_url)))
   return_urls = []
 
   url_format = set_url
   url_format += "?perSite=20&site=#{raw.css("div#pagination").css("a.dropdown-item").count.to_s}"
-  binding.pry
   raw.css("div#pagination").css("a.dropdown-item").map do |page|
     url_format.gsub(/site=[0-9]+/, "site=#{page.children.text}")
   end
@@ -36,8 +35,9 @@ def scrape_set(set_url)
     raw = Nokogiri::HTML(Net::HTTP.get(URI(page)))
     raw.css('div[id^="productRow"]').each do |card|
       card_data = Hash.new
-      card_data["card_url"] = card.css("a")[1]["href"]
       card_data["card_name"] = card.css("div.col-10.col-md-8.px-2.flex-column.align-items-start.justify-content-center").text
+      LOGGER.info "  Processing #{card_data["card_name"]}"
+      card_data["card_url"] = card.css("a")[1]["href"]
       card_data["card_set_number"] = card.css("div.col-md-2.d-none.d-lg-flex.has-content-centered").text
       # rarity = card.css("div.col-sm-2.d-none.d-sm-flex.has-content-centered > span > span")
       card_data["available_inventory"] = card.css("div.col-availability.px-2 > span").text
