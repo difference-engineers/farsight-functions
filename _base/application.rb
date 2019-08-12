@@ -14,7 +14,7 @@ class Application < Roda
     router.root do
       router.get do
         # GET /
-        function(:router => router, :response => response, :database => ::DATABASE)
+        function(:request => request, :response => response, :database => ::DATABASE)
       end
     end
   end

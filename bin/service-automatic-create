@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-system("POSTGRES_HOST=localhost POSTGRES_USERNAME=gitpod _services/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh")
+system("bin/local _base ../_services/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh")
 if File.exist?("DRAFT")
   name = File.read("DRAFT").chomp.gsub(/(\W|\.)/, "-")
   system("mkdir #{name}/")
