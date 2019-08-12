@@ -117,6 +117,8 @@ GEM
     grpc (1.20.0)
       google-protobuf (~> 3.7)
       googleapis-common-protos-types (~> 1.0.0)
+    i18n (1.6.0)
+      concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     interception (0.5)
     jaro_winkler (1.5.3)
@@ -125,9 +127,16 @@ GEM
     mapping (1.1.1)
     memoist (0.16.0)
     method_source (0.9.2)
+    mini_portile2 (2.4.0)
+    monetize (1.9.2)
+      money (~> 6.12)
+    money (6.13.4)
+      i18n (>= 0.6.4, <= 2)
     multi_json (1.13.1)
     multipart-post (2.1.1)
     nio4r (2.3.1)
+    nokogiri (1.10.3)
+      mini_portile2 (~> 2.4.0)
     os (1.0.1)
     parallel (1.17.0)
     parser (2.6.3.0)
@@ -249,6 +258,8 @@ PLATFORMS
 DEPENDENCIES
   async-http (~> 0.40.3)
   falcon (~> 0.30.0)
+  monetize (~> 1.9)
+  nokogiri (~> 1.10)
   pg (~> 1.1)
   pry (~> 0.12.2)
   pry-auto_benching.rb (~> 3.2)
@@ -276,4 +287,4 @@ RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   1.17.2
+   1.17.3
