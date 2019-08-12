@@ -79,10 +79,8 @@ def scrape_card_page(url)
 end
 
 def scrape_set_slugs()
-  # here's the curl request we want to imitate
-
-  #curl 'https://www.cardmarket.com/en/Magic/Products/Singles/War-of-the-Spark-Japanese-Alternate-Art-Planeswalkers?idCategory=1&idExpansion=#{set_id}&idRarity=0&sortBy=popularity_desc&perSite=20' -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36' -H 'Sec-Fetch-Mode: navigate' -H 'Sec-Fetch-User: ?1' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3' -H 'Sec-Fetch-Site: same-origin' -H 'Referer: https://www.cardmarket.com/en/Magic/Products/Singles/War-of-the-Spark-Japanese-Alternate-Art-Planeswalkers?idRarity=0&sortBy=popularity_desc&perSite=20' -H 'Accept-Encoding: gzip, deflate, br' -H 'Accept-Language: en-US,en;q=0.9' --compressed
   set_id = "1652"
+
   uri = URI.parse("https://www.cardmarket.com/en/Magic/Products/Singles/War-of-the-Spark-Japanese-Alternate-Art-Planeswalkers?idCategory=1&idExpansion=#{set_id}&idRarity=0&sortBy=popularity_desc&perSite=20")
   request = Net::HTTP::Get.new(uri)
   request["Connection"] = "keep-alive"
