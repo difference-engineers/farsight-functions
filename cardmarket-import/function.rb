@@ -14,9 +14,6 @@ def set_ids
   end.compact
 end
 
-def set_slugs
-end
-
 def every_page(set_url)
   LOGGER.error("Invalid set url passed, requires the base set url without query strings.") if (set_url.include?("?perSite="))
   raw = Nokogiri::HTML(Net::HTTP.get(URI(set_url)))
