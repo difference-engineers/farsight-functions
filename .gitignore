@@ -24,6 +24,7 @@
 */application.rb
 */configuration.rb
 */config.ru
+*/mocks.rb
 */database.rb
 */Gemfile
 */Gemfile.lock

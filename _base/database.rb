@@ -27,5 +27,9 @@ DATABASE = ROM.container(:sql, ENV.fetch("POSTGRES_URI"), CONFIGURATION) do |let
     let.relation(:cards) do
       schema(:infer => true)
     end
+
+    let.relation(:mtgjson_imports) do
+      schema(:infer => true)
+    end
   end
 end
