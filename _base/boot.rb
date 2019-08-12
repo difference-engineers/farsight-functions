@@ -2,6 +2,9 @@
 require("securerandom")
 require("rubygems")
 require("bundler")
+require("net/http")
+require("uri")
+
 
 $stdout.sync = true
 $stderr.sync = true
