@@ -76,8 +76,6 @@ def scrape_card_page(url)
 end
 
 def scrape_set_slugs()
-  set_id = "1652"
-
   set_ids.each do |set_id|
     uri = URI.parse("https://www.cardmarket.com/en/Magic/Products/Singles/War-of-the-Spark-Japanese-Alternate-Art-Planeswalkers?idCategory=1&idExpansion=#{set_id}&idRarity=0&sortBy=popularity_desc&perSite=20")
     request = Net::HTTP::Get.new(uri)
