@@ -1,6 +1,23 @@
 #!/bin/bash
-
 set -e
-
-createuser --host=$POSTGRES_HOST --username=$POSTGRES_USERNAME application
-createdb --host=$POSTGRES_HOST --username=$POSTGRES_USERNAME --owner=application resources
+psql -v ON_ERROR_STOP=1 --username "postgres" --dbname "template1" <<-EOSQL
+  CREATE EXTENSION "citext";
+  CREATE EXTENSION "pgcrypto";
+  CREATE EXTENSION "cube";
+  CREATE EXTENSION "btree_gin";
+  CREATE EXTENSION "btree_gist";
+  CREATE EXTENSION "hstore";
+  CREATE EXTENSION "isn";
+  CREATE EXTENSION "ltree";
+  CREATE EXTENSION "lo";
+  CREATE EXTENSION "fuzzystrmatch";
+  CREATE EXTENSION "pg_buffercache";
+  CREATE EXTENSION "pgrowlocks";
+  CREATE EXTENSION "pg_prewarm";
+  CREATE EXTENSION "pg_stat_statements";
+  CREATE EXTENSION "pg_trgm";
+  CREATE EXTENSION "tablefunc";
+  CREATE USER "gitpod" SUPERUSER;
+  CREATE DATABASE "resources";
+  GRANT ALL PRIVILEGES ON DATABASE "resources" TO "gitpod";
+EOSQL

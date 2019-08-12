@@ -4,6 +4,7 @@ File.read("SERVICES").split("\n").each do |name|
   system("unlink #{name}/db/")
   system("unlink #{name}/boot.rb")
   system("unlink #{name}/config.ru")
+  system("unlink #{name}/mocks.rb")
   system("unlink #{name}/configuration.rb")
   system("unlink #{name}/application.rb")
   system("unlink #{name}/database.rb")

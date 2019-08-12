@@ -1,2 +1,4 @@
-mtgjson-import
+mtgjson-import-cards
+mtgjson-import-keywords
+mtgjson-import-sets
 mtggoldfish-historical-prices-import
