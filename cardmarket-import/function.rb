@@ -78,28 +78,33 @@ end
 def scrape_set_slugs()
   set_id = "1652"
 
-  uri = URI.parse("https://www.cardmarket.com/en/Magic/Products/Singles/War-of-the-Spark-Japanese-Alternate-Art-Planeswalkers?idCategory=1&idExpansion=#{set_id}&idRarity=0&sortBy=popularity_desc&perSite=20")
-  request = Net::HTTP::Get.new(uri)
-  request["Connection"] = "keep-alive"
-  request["Upgrade-Insecure-Requests"] = "1"
-  request["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
-  request["Sec-Fetch-Mode"] = "navigate"
-  request["Sec-Fetch-User"] = "?1"
-  request["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
-  request["Sec-Fetch-Site"] = "same-origin"
-  request["Referer"] = "https://www.cardmarket.com/en/Magic/Products/Singles/War-of-the-Spark-Japanese-Alternate-Art-Planeswalkers?idRarity=0&sortBy=popularity_desc&perSite=20"
-  request["Accept-Language"] = "en-US,en;q=0.9"
+  set_ids.each do |set_id|
+    uri = URI.parse("https://www.cardmarket.com/en/Magic/Products/Singles/War-of-the-Spark-Japanese-Alternate-Art-Planeswalkers?idCategory=1&idExpansion=#{set_id}&idRarity=0&sortBy=popularity_desc&perSite=20")
+    request = Net::HTTP::Get.new(uri)
+    request["Connection"] = "keep-alive"
+    request["Upgrade-Insecure-Requests"] = "1"
+    request["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+    request["Sec-Fetch-Mode"] = "navigate"
+    request["Sec-Fetch-User"] = "?1"
+    request["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
+    request["Sec-Fetch-Site"] = "same-origin"
+    request["Referer"] = "https://www.cardmarket.com/en/Magic/Products/Singles/War-of-the-Spark-Japanese-Alternate-Art-Planeswalkers?idRarity=0&sortBy=popularity_desc&perSite=20"
+    request["Accept-Language"] = "en-US,en;q=0.9"
 
-  req_options = {
-    use_ssl: uri.scheme == "https",
-  }
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
 
-  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-    http.request(request)
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+    redirect_string = response.header['location']
+    slug = redirect_string.gsub(/.*Singles\//, "")
+    slug.gsub!(/\?.*/, "")
+
+    output = { "set_id" => set_id, "set_slug" => slug }
+    pp output
   end
-  redirect_string = response.header['location']
-  slug = redirect_string.gsub(/.*Singles\//, "")
-  slug.gsub!(/\?.*/, "")
 
-  { "set_id" => set_id, "set_slug" => slug }
+
 end
