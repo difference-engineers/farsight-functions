@@ -76,7 +76,9 @@ def scrape_card_page(url)
 end
 
 def scrape_set_slugs()
+  output = []
   set_ids.each do |set_id|
+    LOGGER.info("Attempting to grab set slug for #{set_id}")
     uri = URI.parse("https://www.cardmarket.com/en/Magic/Products/Singles/War-of-the-Spark-Japanese-Alternate-Art-Planeswalkers?idCategory=1&idExpansion=#{set_id}&idRarity=0&sortBy=popularity_desc&perSite=20")
     request = Net::HTTP::Get.new(uri)
     request["Connection"] = "keep-alive"
@@ -96,13 +98,16 @@ def scrape_set_slugs()
     response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
       http.request(request)
     end
+
+    binding.pry if (set_id == "1483" || set_id == 1483)
     redirect_string = response.header['location']
+    LOGGER.info("Redirect string is #{redirect_string}")
     slug = redirect_string.gsub(/.*Singles\//, "")
     slug.gsub!(/\?.*/, "")
 
-    output = { "set_id" => set_id, "set_slug" => slug }
-    pp output
+
+    output.push({ "set_id" => set_id, "set_slug" => slug })
+    LOGGER.info("Set slug for #{set_id} was found to be #{slug}")
   end
-
-
+  output
 end
