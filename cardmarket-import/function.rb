@@ -106,12 +106,11 @@ def scrape_set_slugs()
     slug.gsub!(/\?.*/, "")
 
 
-<<<<<<< HEAD
     output.push({ "set_id" => set_id, "set_slug" => slug })
     LOGGER.info("Set slug for #{set_id} was found to be #{slug}")
+    LOGGER.info("Sleeping 1s")
+    sleep 1
+
   end
   output
 end
-=======
-end
->>>>>>> 8d3d7c29fd84dbd16a4bd2d6607714950ab9a0b9
