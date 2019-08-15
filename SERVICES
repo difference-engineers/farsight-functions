@@ -1,2 +1,4 @@
-mtgjson-import
+mtgjson-import-cards
+mtgjson-import-sets
+mtgjson-import-keywords
 cardmarket-import
