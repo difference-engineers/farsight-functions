@@ -110,7 +110,7 @@ def scrape_set_slugs()
     LOGGER.info("Set slug for #{set_id} was found to be #{slug}")
     LOGGER.info("Sleeping 1s")
     sleep 1
-
+    pp output
   end
   output
 end
