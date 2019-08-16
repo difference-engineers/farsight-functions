@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USERNAME" --dbname "template1" <<-EOSQL
+  BEGIN;
   CREATE EXTENSION "citext";
   CREATE EXTENSION "pgcrypto";
   CREATE EXTENSION "cube";
@@ -20,4 +21,5 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USERNAME" --dbname "template1" <<-
   CREATE USER "gitpod" SUPERUSER;
   CREATE DATABASE "resources";
   GRANT ALL PRIVILEGES ON DATABASE "resources" TO "gitpod";
+  COMMIT;
 EOSQL
