@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-createdb resources;
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USERNAME" --dbname "template1" <<-EOSQL
   BEGIN;
   CREATE EXTENSION IF NOT EXISTS "citext";
@@ -19,6 +18,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USERNAME" --dbname "template1" <<-
   CREATE EXTENSION IF NOT EXISTS "pg_stat_statements";
   CREATE EXTENSION IF NOT EXISTS "pg_trgm";
   CREATE EXTENSION IF NOT EXISTS "tablefunc";
-  GRANT ALL PRIVILEGES ON DATABASE "resources" TO "gitpod";
   COMMIT;
+  CREATE DATABASE "resources";
+  GRANT ALL PRIVILEGES ON DATABASE "resources" TO "gitpod";
 EOSQL
