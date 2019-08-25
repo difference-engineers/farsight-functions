@@ -19,6 +19,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USERNAME" --dbname "template1" <<-
   CREATE EXTENSION IF NOT EXISTS "pg_trgm";
   CREATE EXTENSION IF NOT EXISTS "tablefunc";
   COMMIT;
+  DROP DATABASE IF EXISTS "resources"
   CREATE DATABASE "resources";
   GRANT ALL PRIVILEGES ON DATABASE "resources" TO "gitpod";
 EOSQL
