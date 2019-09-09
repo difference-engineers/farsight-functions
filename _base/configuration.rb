@@ -11,7 +11,7 @@ LOGGER = SemanticLogger[SERVICE]
 
 if CONSOLE
   def Pry.reload!
-    $LOADED_FEATURES.grep(/#{SERVICE}/).reject{|file| file.match?(/boot|config|application/)}.each(&method(:load))
+    $LOADED_FEATURES.grep(/#{SERVICE}/).reject {|file| file.match?(/boot|config|application/)}.each(&method(:load))
   end
 end
 
