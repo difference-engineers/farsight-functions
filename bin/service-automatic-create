@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-system("bin/local base ../.docker-compose/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh")
 if File.exist?("DRAFT")
   name = File.read("DRAFT").chomp.gsub(/(\W|\.)/, "-")
   system("mkdir #{name}/")

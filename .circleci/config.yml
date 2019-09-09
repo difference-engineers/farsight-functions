@@ -40,11 +40,14 @@ jobs:
           name: "link all services to the defaults"
           command: "bin/local-link-all"
       - run:
+          name: "setup the basics of the database"
+          command: "bin/local base ../.docker-compose/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh"
+      - run:
           name: "install all libraries"
           command: "bin/local base bundle install"
       - run:
           name: "reset the database"
-          command: "bin/local base bundle exec rake db:create db:reset"
+          command: "bin/local base bundle exec rake db:migrate"
       - save_cache:
           paths: ["./vendor/bundle"]
           key: v1-dependencies-{{ checksum "./base/Gemfile.lock" }}
