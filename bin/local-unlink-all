@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 File.read("SERVICES").split("\n").each do |name|
+  puts "Creating links for #{name}/..."
   system("unlink #{name}/db/")
   system("unlink #{name}/boot.rb")
   system("unlink #{name}/config.ru")
