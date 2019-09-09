@@ -34,14 +34,14 @@ jobs:
     steps:
       - "checkout"
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+          keys:
+            - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
       - run:
-        name: "setup services"
-        command: "bin/local-setup"
+          name: "setup services"
+          command: "bin/local-setup"
       - save_cache:
-        paths: ["./vendor/bundle"]
-        key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+          paths: ["./vendor/bundle"]
+          key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
   lint:
     docker:
       - *image-ruby
