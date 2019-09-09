@@ -1,33 +1,72 @@
-# Ruby CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
+# CircleCI 2.0 configuration file
 version: 2
+x-defaults:
+  images:
+    ruby: &image-ruby
+      image: "circleci/ruby:2.6.3"
+      environment:
+        DEPLOY_ENV: "development"
+        RACK_ENV: "development"
+        POSTGRES_USER: "postgres"
+        POSTGRES_PASSWORD: ""
+        POSTGRES_HOST: "postgres"
+        POSTGRES_URI: "postgresql:///resources"
+  step:
+    setup_services: &step-setup_services
+      run:
+        name: "setup services"
+        command: "bin/local-setup"
+    restore_cache: &step-restore_cache
+      restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+    save_cache: &step-save_cache
+      save_cache:
+        paths: ["./vendor/bundle"]
+        key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+workflows:
+  version: 2
+  primary:
+    jobs:
+      - setup
+      - lint:
+          requires:
+            - setup
+      - typecheck:
+          requires:
+            - setup
+      - build:
+          requires:
+            - setup
 jobs:
-  build:
+  setup:
+    docker:
+      - *image-ruby
+      - image: "circleci/postgres:11.2"
+    steps:
+      - "checkout"
+      - *step-restore_cache
+      - *step-setup_services
+      - *step-save_cache
+  lint:
     # TODO: bundler env variables --jobs=4 --retry=3
     docker:
-      - image: circleci/ruby:2.6.3
-        environment:
-          DEPLOY_ENV: "development"
-          RACK_ENV: "development"
-          POSTGRES_USER: "postgres"
-          POSTGRES_PASSWORD: ""
-          POSTGRES_HOST: "postgres"
-          POSTGRES_URI: "postgresql:///resources"
-      - image: circleci/postgres:11.2
+      - *image-ruby
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
       - run:
-          name: setup services
-          command: bin/local-setup
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+          name: "check against linter"
+          command: "bin/local-each bin/local-lint"
+  typecheck:
+    # TODO: bundler env variables --jobs=4 --retry=3
+    docker:
+      - *image-ruby
+    steps:
       - run:
-          name: run tooling
-          command: "bin/local-check"
+          name: "check against typechecker"
+          command: "bin/local-each bin/local-typecheck"
+  build:
+    machine: true
+    steps:
+      - run:
+          name: "build images"
+          command: "bin/local-each bin/docker-build-ci"
