@@ -1,5 +1,6 @@
 # The Docker image to run your workspace in. Defaults to gitpod/workspace-full
-image: gitpod/workspace-postgres
+image:
+  file: ".gitpod/Dockerfile"
 tasks:
   - command: "bin/local base ../.docker-compose/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh && bin/service-automatic-create && bin/local-setup"
 ports:
