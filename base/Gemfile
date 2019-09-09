@@ -12,6 +12,7 @@ gem("rom-sql", "~> 3.0")
 gem("semantic_logger", "~> 4.5")
 gem("rake", "~> 12.3")
 gem("async-http", "~> 0.40.3")
+gem("sorbet-runtime", "~> 0.4.4724")
 
 group(:production) do
   gem(
@@ -30,8 +31,7 @@ group(:development) do
   gem("rubocop-rspec", "~> 1.33")
   gem("rubocop-performance", "~> 1.4")
   gem("rubocop-thread_safety", "~> 0.3.4")
-  gem("sorbet", "~> 0.4.4394")
-  gem("sorbet-runtime", "~> 0.4.4394")
+  gem("sorbet", "~> 0.4.4724")
   gem("pry", "~> 0.12.2")
   gem("pry-doc", "~> 1.0")
   gem("pry-coolline", "~> 0.2.5")

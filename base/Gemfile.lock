@@ -225,10 +225,10 @@ GEM
       jwt (>= 1.5, < 3.0)
       multi_json (~> 1.10)
     slop (3.6.0)
-    sorbet (0.4.4394)
-      sorbet-static (= 0.4.4394)
-    sorbet-runtime (0.4.4394)
-    sorbet-static (0.4.4394-universal-darwin-14)
+    sorbet (0.4.4724)
+      sorbet-static (= 0.4.4724)
+    sorbet-runtime (0.4.4724)
+    sorbet-static (0.4.4724-universal-darwin-14)
     stackdriver (0.15.3)
       google-cloud-debugger (~> 0.32)
       google-cloud-error_reporting (~> 0.30)
@@ -268,12 +268,12 @@ DEPENDENCIES
   rubocop-rspec (~> 1.33)
   rubocop-thread_safety (~> 0.3.4)
   semantic_logger (~> 4.5)
-  sorbet (~> 0.4.4394)
-  sorbet-runtime (~> 0.4.4394)
+  sorbet (~> 0.4.4724)
+  sorbet-runtime (~> 0.4.4724)
   stackdriver (~> 0.15.3)
 
 RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   1.17.2
+   1.17.3
