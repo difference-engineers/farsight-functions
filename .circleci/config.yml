@@ -63,7 +63,7 @@ jobs:
           name: "run migrations"
           command: "bin/local base bundle exec rake db:migrate"
       - save_cache:
-          paths: ["../vendor/bundle"]
+          paths: ["./vendor/bundle"]
           key: v1-dependencies-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ checksum "base/Gemfile.lock" }}
   lint:
     docker:
