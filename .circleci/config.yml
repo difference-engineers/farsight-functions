@@ -35,7 +35,7 @@ jobs:
       - "checkout"
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+            - v1-dependencies-{{ checksum "./base/Gemfile.lock" }}
       - run:
           name: "link all services to the defaults"
           command: "bin/local-link-all"
@@ -47,7 +47,7 @@ jobs:
           command: "bin/local base bundle exec rake db:reset"
       - save_cache:
           paths: ["./vendor/bundle"]
-          key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "./base/Gemfile.lock" }}
   lint:
     docker:
       - *image-ruby
