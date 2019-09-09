@@ -8,7 +8,7 @@ x-defaults:
       environment:
         BUNDLE_JOBS: "4"
         BUNDLE_RETRY: "10"
-        BUNDLE_PATH: ./vendor/bundle
+        BUNDLE_PATH: ../vendor/bundle
         DEPLOY_ENV: "development"
         RACK_ENV: "development"
         POSTGRES_USER: "postgres"
@@ -63,7 +63,7 @@ jobs:
           name: "run migrations"
           command: "bin/local base bundle exec rake db:migrate"
       - save_cache:
-          paths: ["./base/vendor/bundle"]
+          paths: ["../vendor/bundle"]
           key: v1-dependencies-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ checksum "base/Gemfile.lock" }}
   lint:
     docker:
