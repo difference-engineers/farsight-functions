@@ -44,7 +44,7 @@ jobs:
           command: "bin/local base bundle install"
       - run:
           name: "reset the database"
-          command: "bin/local base bundle exec rake db:reset"
+          command: "bin/local base bundle exec rake db:create db:reset"
       - save_cache:
           paths: ["./vendor/bundle"]
           key: v1-dependencies-{{ checksum "./base/Gemfile.lock" }}
