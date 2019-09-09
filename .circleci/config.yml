@@ -33,15 +33,15 @@ jobs:
       - image: "circleci/postgres:11.2"
     steps:
       - "checkout"
-    restore_cache:
-      keys:
-        - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
-    run:
-      name: "setup services"
-      command: "bin/local-setup"
-    save_cache:
-      paths: ["./vendor/bundle"]
-      key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+      - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+      - run:
+        name: "setup services"
+        command: "bin/local-setup"
+      - save_cache:
+        paths: ["./vendor/bundle"]
+        key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
   lint:
     docker:
       - *image-ruby
