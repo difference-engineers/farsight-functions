@@ -8,8 +8,8 @@ services:
     labels:
       traefik.enable: "false"
     volumes:
-      - "./_services/postgres/data/:/var/lib/postgresql/data/"
-      - "./_services/postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/"
+      - "./.docker-compose/postgres/data/:/var/lib/postgresql/data/"
+      - "./.docker-compose/postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/"
     logging:
       options:
         max-size: 1m

@@ -41,10 +41,10 @@ jobs:
           command: "bin/local-link-all"
       - run:
           name: "install all libraries"
-          command: "bin/local _base bundle install"
+          command: "bin/local base bundle install"
       - run:
           name: "reset the database"
-          command: "bin/local _base bundle exec rake db:reset"
+          command: "bin/local base bundle exec rake db:reset"
       - save_cache:
           paths: ["./vendor/bundle"]
           key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}

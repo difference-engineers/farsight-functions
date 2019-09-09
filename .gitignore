@@ -10,7 +10,7 @@
 # Ignore all temporary files
 /tmp/*
 !/tmp/.keep
-/_services/*/data/
+/.docker-compose/*/data/
 
 # Ignore secret data
 /.env
@@ -32,4 +32,4 @@
 */.tool-versions
 
 # _base looks like linked information, but isn't
-!_base/*
+!base/*

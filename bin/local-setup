@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
 system("bin/local-link-all")
-system("bin/local _base bundle install")
-system("bin/local _base bundle exec rake db:reset")
+system("bin/local base bundle install")
+system("bin/local base bundle exec rake db:reset")

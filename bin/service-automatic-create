@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-system("bin/local _base ../_services/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh")
+system("bin/local base ../.docker-compose/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh")
 if File.exist?("DRAFT")
   name = File.read("DRAFT").chomp.gsub(/(\W|\.)/, "-")
   system("mkdir #{name}/")
-  system("cp -r _template/* #{name}/")
+  system("cp -r .template/* #{name}/")
   File.write(File.join(name, "Dockerfile"), File.read(File.join(name, "Dockerfile")).gsub("{{name}}", name))
   File.write("SERVICES", [*File.read("SERVICES").split("\n"), name].join("\n"))
   system("git add SERVICES #{name}/")

@@ -25,7 +25,7 @@ File.read("SERVICES").split("\n").each do |name|
       "_SERVICE_ID" => name
     },
     description: "Push to master branch (#{name})",
-    filename: "_gcloud/cloudbuild.yaml"
+    filename: ".gcloud/cloudbuild.yaml"
   })
 
   response = http.request(request)

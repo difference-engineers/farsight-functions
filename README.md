@@ -60,8 +60,8 @@ You'll know the process has worked because once gitpod has fully started your en
 Sometimes a service will need a specific library that most services wont need. For example, lets say you have a service that turns CSV documents into excel documents. You'll want to add the library like this:
 
 ```
-bin/local _base bundle add {{library}} --group={{service}}
-bin/local _base bundle add xlsx-reader --group=mtgjson-import-cards
+bin/local base bundle add {{library}} --group={{service}}
+bin/local base bundle add xlsx-reader --group=mtgjson-import-cards
 ```
 
 
