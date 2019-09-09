@@ -40,6 +40,9 @@ jobs:
           name: "link all services to the defaults"
           command: "bin/local-link-all"
       - run:
+          name: "ensuring basic dependencies installed"
+          command: "sudo apt install postgresql-client"
+      - run:
           name: "setup the basics of the database"
           command: "bin/local base ../.docker-compose/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh"
       - run:
