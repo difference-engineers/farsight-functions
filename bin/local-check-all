@@ -2,6 +2,6 @@
 
 File.read("SERVICES").split("\n").each do |name|
   puts "Checking for errors in #{name}..."
-  exit unless `bin/local-lint #{name}`
-  exit unless `bin/local-typecheck #{name}`
+  exit unless system("bin/local-lint #{name}")
+  exit unless system("bin/local-typecheck #{name}")
 end

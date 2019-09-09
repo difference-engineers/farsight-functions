@@ -3,5 +3,5 @@
 system("bin/build && docker-compose build --compress --parallel")
 
 File.read("SERVICES").split("\n").each do |name|
-  exit unless `docker-compose --compatibility up #{name}`
+  exit unless system("docker-compose --compatibility up #{name}")
 end
