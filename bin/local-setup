@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-exit unless system("bin/local-link-all")
-exit unless system("bin/local base bundle install")
-exit unless system("bin/local base bundle exec rake db:migrate db:reset")
+exit(1) unless system("bin/local-link-all")
+exit(1) unless system("bin/local base bundle install")
+exit(1) unless system("bin/local base bundle exec rake db:migrate db:reset")

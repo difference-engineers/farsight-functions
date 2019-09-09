@@ -3,13 +3,11 @@
 set -e
 
 docker build \
-  --tag us.gcr.io/farsight-239605/base:`git rev-parse --short HEAD 2> /dev/null` \
+  --tag us.gcr.io/farsight-239605/base:latest \
   base
 
 if [ $1 ]
   then
   docker build \
-    --tag farsight-functions_$1 \
-    --tag us.gcr.io/farsight-239605/$1:`git rev-parse --short HEAD 2> /dev/null` \
     $1
 fi

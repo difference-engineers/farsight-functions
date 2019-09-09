@@ -2,12 +2,12 @@
 
 if File.exist?("DRAFT")
   name = File.read("DRAFT").chomp.gsub(/(\W|\.)/, "-")
-  exit unless system("mkdir #{name}/")
-  exit unless system("cp -r .template/* #{name}/")
+  exit(1) unless system("mkdir #{name}/")
+  exit(1) unless system("cp -r .template/* #{name}/")
   File.write(File.join(name, "Dockerfile"), File.read(File.join(name, "Dockerfile")).gsub("{{name}}", name))
   File.write("SERVICES", [*File.read("SERVICES").split("\n"), name].join("\n"))
-  exit unless system("git add SERVICES #{name}/")
-  exit unless system("git rm DRAFT")
-  exit unless system("git commit -m 'Finalizing the creation of #{name}'")
-  exit unless system("git push origin HEAD")
+  exit(1) unless system("git add SERVICES #{name}/")
+  exit(1) unless system("git rm DRAFT")
+  exit(1) unless system("git commit -m 'Finalizing the creation of #{name}'")
+  exit(1) unless system("git push origin HEAD")
 end
