@@ -43,6 +43,9 @@ jobs:
           name: "ensuring basic dependencies installed"
           command: "sudo apt install postgresql-client"
       - run:
+          name: "wait for the database to be ready"
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
           name: "setup the basics of the database"
           command: "bin/local base ../.docker-compose/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh"
       - run:

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-psql -v ON_ERROR_STOP=1 --username "postgres" --dbname "template1" <<-EOSQL
+psql -v ON_ERROR_STOP=1 --host "$POSTGRES_HOST" --username "$POSTGRES_USERNAME" --dbname "template1" <<-EOSQL
   BEGIN;
     CREATE EXTENSION IF NOT EXISTS "citext";
     CREATE EXTENSION IF NOT EXISTS "pgcrypto";
@@ -21,7 +21,7 @@ psql -v ON_ERROR_STOP=1 --username "postgres" --dbname "template1" <<-EOSQL
     CREATE EXTENSION IF NOT EXISTS "tablefunc";
   COMMIT;
 EOSQL
-psql -v --username "postgres" --dbname "template1" <<-EOSQL
+psql -v --username "$POSTGRES_USERNAME" --host "$POSTGRES_HOST" --dbname "template1" <<-EOSQL
   DROP DATABASE IF EXISTS "resources";
   CREATE DATABASE "resources";
   GRANT ALL PRIVILEGES ON DATABASE "resources" TO "postgres";
