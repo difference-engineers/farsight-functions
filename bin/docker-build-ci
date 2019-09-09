@@ -3,12 +3,10 @@
 set -e
 
 docker build \
-  --cache-from us.gcr.io/farsight-239605/base:latest \
   base
 
 if [ $1 ]
   then
   docker build \
-    --cache-from us.gcr.io/farsight-239605/base:latest \
     $1
 fi
