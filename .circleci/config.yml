@@ -12,6 +12,15 @@ x-defaults:
         POSTGRES_PASSWORD: ""
         POSTGRES_HOST: "postgres"
         POSTGRES_URI: "postgresql:///resources"
+  steps:
+    restore_cache: &step-restore_cache
+      restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "./base/Gemfile.lock" }}
+    link_all: &step-link_all
+      run:
+        name: "link all services to the defaults"
+        command: "bin/local-link-all"
 workflows:
   version: 2
   primary:
@@ -33,12 +42,8 @@ jobs:
       - image: "circleci/postgres:11.2"
     steps:
       - "checkout"
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "./base/Gemfile.lock" }}
-      - run:
-          name: "link all services to the defaults"
-          command: "bin/local-link-all"
+      - *step-restore_cache
+      - *step-link_all
       - run:
           name: "ensuring basic dependencies installed"
           command: "sudo apt install postgresql-client"
@@ -52,15 +57,18 @@ jobs:
           name: "install all libraries"
           command: "bin/local base bundle install"
       - run:
-          name: "reset the database"
+          name: "run migrations"
           command: "bin/local base bundle exec rake db:migrate"
       - save_cache:
-          paths: ["./vendor/bundle"]
+          paths: ["./vendor/bundle", ".git"]
           key: v1-dependencies-{{ checksum "./base/Gemfile.lock" }}
   lint:
     docker:
       - *image-ruby
     steps:
+      - "checkout"
+      - *step-restore_cache
+      - *step-link_all
       - run:
           name: "check against linter"
           command: "bin/local-each bin/local-lint"
@@ -68,12 +76,18 @@ jobs:
     docker:
       - *image-ruby
     steps:
+      - "checkout"
+      - *step-restore_cache
+      - *step-link_all
       - run:
           name: "check against typechecker"
           command: "bin/local-each bin/local-typecheck"
   build:
     machine: true
     steps:
+      - "checkout"
+      - *step-restore_cache
+      - *step-link_all
       - run:
           name: "build images"
           command: "bin/local-each bin/docker-build-ci"
