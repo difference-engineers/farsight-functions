@@ -2,12 +2,12 @@
 
 File.read("SERVICES").split("\n").each do |name|
   puts "Creating links for #{name}/..."
-  system("unlink #{name}/db/")
-  system("unlink #{name}/boot.rb")
-  system("unlink #{name}/config.ru")
-  system("unlink #{name}/mocks.rb")
-  system("unlink #{name}/configuration.rb")
-  system("unlink #{name}/application.rb")
-  system("unlink #{name}/database.rb")
-  system("unlink #{name}/Rakefile")
+  exit unless `unlink #{name}/db/`
+  exit unless `unlink #{name}/boot.rb`
+  exit unless `unlink #{name}/config.ru`
+  exit unless `unlink #{name}/mocks.rb`
+  exit unless `unlink #{name}/configuration.rb`
+  exit unless `unlink #{name}/application.rb`
+  exit unless `unlink #{name}/database.rb`
+  exit unless `unlink #{name}/Rakefile`
 end

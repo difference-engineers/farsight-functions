@@ -2,9 +2,9 @@
 
 puts "What's the name of this function?"
 name = gets.chomp.gsub(/(\W|\.)/, "-")
-system("mkdir #{name}/")
-system("cp -r .template/* #{name}/")
+exit unless `mkdir #{name}/`
+exit unless `cp -r .template/* #{name}/`
 File.write(File.join(name, "Dockerfile"), File.read(File.join(name, "Dockerfile")).gsub("{{name}}", name))
 File.write("SERVICES", [**File.read("SERVICES").split("\n"), name].join("\n"))
-system("git add SERVICES #{name}/")
-system("git commit -m 'Finalizing the creation of #{name}'")
+exit unless `git add SERVICES #{name}/`
+exit unless `git commit -m 'Finalizing the creation of #{name}'`
