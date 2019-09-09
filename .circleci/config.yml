@@ -2,10 +2,12 @@
 version: 2
 x-defaults:
   images:
-    # TODO: bundler env variables --jobs=4 --retry=3
     ruby: &image-ruby
       image: "circleci/ruby:2.6.3"
       environment:
+        BUNDLE_JOBS: "4"
+        BUNDLE_RETRY: "10"
+        BUNDLE_PATH: ./vendor/bundle
         DEPLOY_ENV: "development"
         RACK_ENV: "development"
         POSTGRES_USER: "postgres"
@@ -16,7 +18,7 @@ x-defaults:
     restore_cache: &step-restore_cache
       restore_cache:
         keys:
-          - v1-dependencies-{{ checksum "./base/Gemfile.lock" }}
+          - v1-dependencies-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ checksum \"base/Gemfile.lock\" }}
     link_all: &step-link_all
       run:
         name: "link all services to the defaults"
@@ -60,8 +62,8 @@ jobs:
           name: "run migrations"
           command: "bin/local base bundle exec rake db:migrate"
       - save_cache:
-          paths: ["./vendor/bundle", ".git"]
-          key: v1-dependencies-{{ checksum "./base/Gemfile.lock" }}
+          paths: ["./vendor/bundle"]
+          key: v1-dependencies-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ checksum \"base/Gemfile.lock\" }}
   lint:
     docker:
       - *image-ruby
