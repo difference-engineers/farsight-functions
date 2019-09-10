@@ -4,7 +4,7 @@ set -e
 
 service=$1
 
-echo "function(request: MOCK_REQUEST, response: MOCK_RESPONSE, database: DATABASE)" | bin/local $service bundle exec ruby \
+echo "function(request: MOCK_REQUEST, database: DATABASE, logger: Async.logger)" | bin/local $service bundle exec ruby \
   -r "./boot" \
   -r "./configuration" \
   -r "./application" \

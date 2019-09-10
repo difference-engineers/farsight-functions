@@ -20,7 +20,7 @@ DATABASE = ROM.container(
     :connection_validator,
   ]
 ) do |let|
-  let.gateways.fetch(:default).use_logger(LOGGER)
+  let.gateways.fetch(:default).use_logger(Async.logger)
 
   unless ENV["MIGRATING"]
     let.relation(:cards) do

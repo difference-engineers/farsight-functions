@@ -8,6 +8,7 @@ ENV CONCURRENCY 2
 WORKDIR /home/root/application/
 
 COPY db/migrate/ db/migrate/
+COPY middleware/ middleware/
 COPY boot.rb .
 COPY configuration.rb .
 COPY application.rb .

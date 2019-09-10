@@ -3,6 +3,7 @@
 File.read("SERVICES").split("\n").each do |name|
   puts "Creating links for #{name}/..."
   exit unless system("unlink #{name}/db/")
+  exit unless system("unlink #{name}/middleware/")
   exit unless system("unlink #{name}/boot.rb")
   exit unless system("unlink #{name}/config.ru")
   exit unless system("unlink #{name}/mocks.rb")
