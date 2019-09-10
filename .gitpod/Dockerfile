@@ -86,7 +86,7 @@ RUN set -ex; \
 	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
 	command -v gpgconf > /dev/null && gpgconf --kill all; \
 	rm -rf "$GNUPGHOME"; \
-	apt-key listl; \
+	apt-key list; \
 	add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 
 ENV PG_MAJOR 11
