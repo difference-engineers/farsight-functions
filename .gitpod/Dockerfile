@@ -1,4 +1,3 @@
-
 FROM buildpack-deps:disco
 
 RUN yes | unminimize \
@@ -87,7 +86,8 @@ RUN set -ex; \
 	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
 	command -v gpgconf > /dev/null && gpgconf --kill all; \
 	rm -rf "$GNUPGHOME"; \
-	apt-key list
+	apt-key listl; \
+	add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 
 ENV PG_MAJOR 11
 ENV PG_VERSION 11.5-1.pgdg90+1
