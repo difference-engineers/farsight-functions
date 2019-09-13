@@ -1,7 +1,6 @@
 .bundle/
 .circleci/
 .DS_Store
-.circleci/
 .gcloud/
 .git/
 .gitpod/
