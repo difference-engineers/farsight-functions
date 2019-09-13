@@ -1,33 +1,96 @@
-# Ruby CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
+# CircleCI 2.0 configuration file
 version: 2
-jobs:
-  build:
+x-defaults:
+  images:
     # TODO: bundler env variables --jobs=4 --retry=3
+    ruby: &image-ruby
+      image: "circleci/ruby:2.6.3"
+      environment:
+        BUNDLE_JOBS: "4"
+        BUNDLE_RETRY: "10"
+        BUNDLE_PATH: ../vendor/bundle
+        DEPLOY_ENV: "development"
+        RACK_ENV: "development"
+        POSTGRES_USER: "postgres"
+        POSTGRES_PASSWORD: ""
+        POSTGRES_HOST: "postgres"
+        POSTGRES_URI: "postgresql:///resources"
+  steps:
+    restore_cache: &step-restore_cache
+      restore_cache:
+        keys:
+          - v1-dependencies-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ checksum "base/Gemfile.lock" }}
+    link_all: &step-link_all
+      run:
+        name: "link all services to the defaults"
+        command: "bin/local-link-all"
+workflows:
+  version: 2
+  primary:
+    jobs:
+      - setup
+      - lint:
+          requires:
+            - setup
+      - typecheck:
+          requires:
+            - setup
+      - build:
+          requires:
+            - setup
+jobs:
+  setup:
     docker:
-      - image: circleci/ruby:2.6.3
-        environment:
-          DEPLOY_ENV: "development"
-          RACK_ENV: "development"
-          POSTGRES_USER: "postgres"
-          POSTGRES_PASSWORD: ""
-          POSTGRES_HOST: "postgres"
-          POSTGRES_URI: "postgresql:///resources"
-      - image: circleci/postgres:11.2
+      - *image-ruby
+      - image: "circleci/postgres:11.2"
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+      - "checkout"
+      - *step-restore_cache
+      - *step-link_all
       - run:
-          name: setup services
-          command: bin/local-setup
+          name: "ensuring basic dependencies installed"
+          command: "sudo apt install postgresql-client"
+      - run:
+          name: "wait for the database to be ready"
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: "setup the basics of the database"
+          command: "bin/local base ../.docker-compose/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh"
+      - run:
+          name: "install all libraries"
+          command: "bin/local base bundle install"
+      - run:
+          name: "run migrations"
+          command: "bin/local base bundle exec rake db:migrate"
       - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "./_base/Gemfile.lock" }}
+          paths: ["./vendor/bundle"]
+          key: v1-dependencies-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ checksum "base/Gemfile.lock" }}
+  lint:
+    docker:
+      - *image-ruby
+    steps:
+      - "checkout"
+      - *step-restore_cache
+      - *step-link_all
       - run:
-          name: run tooling
-          command: "bin/local-check"
+          name: "check against linter"
+          command: "bin/local-each bin/local-lint"
+  typecheck:
+    docker:
+      - *image-ruby
+    steps:
+      - "checkout"
+      - *step-restore_cache
+      - *step-link_all
+      - run:
+          name: "check against typechecker"
+          command: "bin/local-each bin/local-typecheck"
+  build:
+    machine: true
+    steps:
+      - "checkout"
+      - *step-restore_cache
+      - *step-link_all
+      - run:
+          name: "build images"
+          command: "bin/local-each bin/docker-build-ci"

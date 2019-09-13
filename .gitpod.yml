@@ -1,6 +1,6 @@
 # The Docker image to run your workspace in. Defaults to gitpod/workspace-full
-image: gitpod/workspace-postgres
+image: "krainboltgreene/workspace:latest"
 tasks:
-  - command: "bin/service-automatic-create && bin/local-setup"
+  - command: "bin/local base ../.docker-compose/postgres/docker-entrypoint-initdb.d/create-users-and-groups.sh && bin/service-automatic-create && bin/local-setup"
 ports:
   - port: 8080

@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+File.read("SERVICES").split("\n").each do |name|
+  puts "Creating links for #{name}/..."
+  exit unless system("unlink #{name}/db/")
+  exit unless system("unlink #{name}/middleware/")
+  exit unless system("unlink #{name}/boot.rb")
+  exit unless system("unlink #{name}/config.ru")
+  exit unless system("unlink #{name}/mocks.rb")
+  exit unless system("unlink #{name}/configuration.rb")
+  exit unless system("unlink #{name}/application.rb")
+  exit unless system("unlink #{name}/database.rb")
+  exit unless system("unlink #{name}/Rakefile")
+end

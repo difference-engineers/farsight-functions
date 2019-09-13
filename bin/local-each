@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+File.read("SERVICES").split("\n").each do |name|
+  exit(1) unless system("#{ARGV[0]} #{name}")
+end

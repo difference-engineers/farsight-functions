@@ -1,10 +1,11 @@
 .bundle/
 .circleci/
+.DS_Store
+.gcloud/
 .git/
-.rubocop/
-services/
-gcloud/
+.gitpod/
+.docker-compose/
+.template/
 docs/
 tmp/
-.DS_Store
 .env

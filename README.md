@@ -2,6 +2,10 @@
 
 A framework for serverless ruby on top of cloud run and also a collection of services for the farsight service.
 
+## hints
+
+  - Inside a pry session you can type `Pry.reload!` to reload all of your ruby code.
+
 
 ## tools
 
@@ -23,12 +27,17 @@ bin/local-pry mtgjson-import
 
 Creates a pry session with the entire context of the service loaded.
 
+*bin/local-run {{service}}*
+
+Excutes the main function of the service without a web server, using a mock response, request, and the regular database.
+
 
 ## services
 
 A service (or sometimes called function) is a singular semi-isolated piece of code that does one job. It has access to the request, the response, the router, a client list, and a database. Using these pieces the service will do some operation.
 
 For example, lets say we wanted a service that cleaned up old data. It would be called on a schedule (every 24h for example), it would pull all old records from the database, transform them to clean versions, and then store them in the database. Finally it would return status 200 (as a show that it completed successfully).
+
 
 ## how to setup
 
@@ -51,6 +60,13 @@ You'll know the process has worked because once gitpod has fully started your en
 Sometimes a service will need a specific library that most services wont need. For example, lets say you have a service that turns CSV documents into excel documents. You'll want to add the library like this:
 
 ```
-bin/local _base bundle add {{library}} --group={{service}}
-bin/local _base bundle add xlsx-reader --group=csv-to-xlsx
+bin/local base bundle add {{library}} --group={{service}}
+bin/local base bundle add xlsx-reader --group=mtgjson-import-cards
+```
+
+
+## How to think about services
+
+```
+(Data Gathering) -> (Decision Making) -> (Acting)
 ```

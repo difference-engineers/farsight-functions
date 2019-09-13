@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+File.read("SERVICES").split("\n").each do |name|
+  puts "Checking for errors in #{name}..."
+  exit(1) unless system("bin/local-lint #{name}")
+  exit(1) unless system("bin/local-typecheck #{name}")
+end

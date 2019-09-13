@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+docker build \
+  --tag us.gcr.io/farsight-239605/base:latest \
+  base
+
+if [ $1 ]
+  then
+  docker build \
+    $1
+fi

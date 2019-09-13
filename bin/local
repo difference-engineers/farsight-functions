@@ -5,7 +5,6 @@ set -e
 service=$1
 shift
 
-
 [ -z "$service" ] && echo "You have to specify the service" && exit 126
 
 echo "[$service] $@"
