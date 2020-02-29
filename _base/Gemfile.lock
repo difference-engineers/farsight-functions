@@ -167,7 +167,7 @@ GEM
     public_suffix (3.0.3)
     rack (2.0.8)
     rainbow (3.0.0)
-    rake (12.3.2)
+    rake (12.3.3)
     rly (0.2.3)
     roda (3.20.0)
       rack
